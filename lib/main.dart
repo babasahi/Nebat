@@ -1,6 +1,7 @@
 // ignore_for_file: avoid_print
 
 import 'package:flutter/material.dart';
+import 'package:nebat/screens/home_screen.dart';
 
 void main() {
   runApp(const MyApp());
