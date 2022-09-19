@@ -1,9 +1,10 @@
 // ignore_for_file: avoid_print
-
 import 'package:flutter/material.dart';
+import 'package:camera/camera.dart';
 import 'package:nebat/screens/home_screen.dart';
 
-void main() {
+void main() async {
+  cameras = await availableCameras();
   runApp(const MyApp());
 }
 

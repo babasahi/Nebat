@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:camera/camera.dart';
+
+late List<CameraDescription> cameras;
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -35,13 +38,52 @@ class IdentificationButton extends StatelessWidget {
   }
 }
 
-class CameraWidget extends StatelessWidget {
+class CameraWidget extends StatefulWidget {
   const CameraWidget({
     Key? key,
   }) : super(key: key);
 
   @override
+  State<CameraWidget> createState() => _CameraWidgetState();
+}
+
+class _CameraWidgetState extends State<CameraWidget> {
+  late CameraController controller;
+  @override
+  void initState() {
+    super.initState();
+    controller = CameraController(cameras[0], ResolutionPreset.max);
+    controller.initialize().then((_) {
+      if (!mounted) {
+        return;
+      }
+      setState(() {});
+    }).catchError((Object e) {
+      if (e is CameraException) {
+        switch (e.code) {
+          case 'CameraAccessDenied':
+            print('User denied camera access.');
+            break;
+          default:
+            print('Handle other errors.');
+            break;
+        }
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    if (!controller.value.isInitialized) {
+      return Container();
+    }
+
     return Container(
       height: (MediaQuery.of(context).size.height / 3) * 2,
       margin: const EdgeInsets.all(22),
@@ -49,7 +91,7 @@ class CameraWidget extends StatelessWidget {
         borderRadius: const BorderRadius.all(Radius.circular(12)),
         border: Border.all(width: 12, color: Colors.deepPurpleAccent),
       ),
-      child: const Center(child: Text('This is Camera')),
+      child: CameraPreview(controller),
     );
   }
 }
