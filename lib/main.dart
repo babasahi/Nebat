@@ -34,16 +34,22 @@ class _HomePageState extends State<HomePage> {
             onTap: () async {
               //TODO:GET PLANT NAME
 
-              String apikey = '2b10sAT8QNrmynlEHhcEpNu';
-              String uri =
-                  'my-api.plantnet.org/v2/identify/all?api-key=2b10sAT8QNrmynlEHhcEpNu&images=https%3A%2F%2Fmy.plantnet.org%2Fimages%2Fimage_1.jpeg&images=https%3A%2F%2Fmy.plantnet.org%2Fimages%2Fimage_2.jpeg&organs=flower&organs=leaf';
+              String apikey =
+                  'nGFgz6bm5mpkvgOVdhCdU31WjIJHEbGAOEEahX3klSkxcnsmpj';
+              String uri = 'https://plant.id/api/v2';
               Uri url = Uri(
                 scheme: 'http',
                 host: 'my-api.plantnet.org',
                 path: uri,
               );
-              http.Response response = await http.get(url);
-              print('this is code : ${response.body}');
+              try {
+                http.Response response = await http.get(
+                  url,
+                );
+                print('this is code : ${response.body}');
+              } catch (e) {
+                print(e);
+              }
             },
             child: const SizedBox(height: 40, child: Text('Get plant name'))),
       )),
