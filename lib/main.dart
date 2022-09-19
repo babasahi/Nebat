@@ -1,4 +1,7 @@
+// ignore_for_file: avoid_print
+
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
 void main() {
   runApp(const MyApp());
@@ -28,7 +31,21 @@ class _HomePageState extends State<HomePage> {
       body: SafeArea(
           child: Center(
         child: GestureDetector(
-            child: SizedBox(height: 40, child: const Text('Get plant name'))),
+            onTap: () async {
+              //TODO:GET PLANT NAME
+
+              String apikey = '2b10sAT8QNrmynlEHhcEpNu';
+              String uri =
+                  'my-api.plantnet.org/v2/identify/all?api-key=2b10sAT8QNrmynlEHhcEpNu&images=https%3A%2F%2Fmy.plantnet.org%2Fimages%2Fimage_1.jpeg&images=https%3A%2F%2Fmy.plantnet.org%2Fimages%2Fimage_2.jpeg&organs=flower&organs=leaf';
+              Uri url = Uri(
+                scheme: 'http',
+                host: 'my-api.plantnet.org',
+                path: uri,
+              );
+              http.Response response = await http.get(url);
+              print('this is code : ${response.body}');
+            },
+            child: const SizedBox(height: 40, child: Text('Get plant name'))),
       )),
     );
   }
