@@ -2,8 +2,6 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:nebat/constants.dart';
 import 'package:nebat/screens/home_screen.dart';
 import 'package:nebat/services/apis.dart';
 
@@ -17,20 +15,14 @@ class CameraWidget extends StatefulWidget {
 }
 
 class _CameraWidgetState extends State<CameraWidget> {
-  Future<void> pickImage() async {
-    final ImagePicker picker = ImagePicker();
-    XFile? file = (await picker.pickImage(source: ImageSource.camera));
-
-    setState(() {
-      image = File(file!.path);
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: (() async {
-        await pickImage();
+        APIS api = APIS();
+        setState(() {
+          image = api.pickImage() as File?;
+        });
       }),
       child: Container(
         height: (MediaQuery.of(context).size.height / 1.5),
@@ -40,11 +32,11 @@ class _CameraWidgetState extends State<CameraWidget> {
           borderRadius: const BorderRadius.all(Radius.circular(12)),
           border: Border.all(width: 12, color: Colors.deepPurpleAccent),
         ),
-        child: resulturl.isEmpty
+        child: image == null
             ? const Center(child: Icon(FontAwesomeIcons.images))
             : Center(
                 child: Image(
-                image: NetworkImage(resulturl),
+                image: FileImage(image!),
                 fit: BoxFit.cover,
                 width: double.infinity,
               )),
@@ -60,8 +52,12 @@ class IdentificationButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
         onTap: () {
-          APIS api = APIS();
-          api.identifyPlant();
+          if (image != null) {
+            APIS api = APIS();
+            api.identifyPlant([image!]);
+          } else {
+            print('please capture image');
+          }
         },
         child: Material(
           elevation: 6,

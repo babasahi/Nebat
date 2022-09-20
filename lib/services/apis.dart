@@ -1,20 +1,42 @@
 // ignore_for_file: avoid_print
 import 'dart:convert';
-import 'dart:html';
+import 'dart:io';
+import 'package:image_picker/image_picker.dart';
 import 'package:nebat/constants.dart';
 
 import 'package:http/http.dart' as http;
 import 'package:nebat/models/models.dart';
+import 'package:nebat/screens/home_screen.dart';
 
 class APIS {
   final String _apikey = 'nGFgz6bm5mpkvgOVdhCdU31WjIJHEbGAOEEahX3klSkxcnsmpj';
   final String _endpoint = 'https://api.plant.id/v2/identify';
 
-  Future<void> identifyPlant() async {
-    final base64Str = window.btoa(raw);
-    List<dynamic> i = [raw, raw];
-    Map<String, dynamic> body = {'images': i};
+  Future<File> pickImage() async {
+    print('capturing image...');
+    final ImagePicker picker = ImagePicker();
+    XFile? file = (await picker.pickImage(source: ImageSource.camera));
+    print('image captured');
+    return File(file!.path);
+  }
+
+  String toBase64(File file) {
+    print('converting image to base64...');
+
+    List<int> bytes = image!.readAsBytesSync();
+    print('converted image to base64');
+    return base64Encode(bytes);
+  }
+
+  Future<void> identifyPlant(List<File> imageFiles) async {
+    List<String> images = [];
+    for (var file in imageFiles) {
+      images.add(toBase64(file));
+    }
+
+    Map<String, dynamic> body = {'images': images};
     try {
+      print('sending request...');
       http.Response response = await http.post(
         Uri.parse(_endpoint),
         headers: {
@@ -24,6 +46,9 @@ class APIS {
         },
         body: jsonEncode(body),
       );
+      print('got response ');
+      print('parsing response...');
+      print(response.body);
       Map<String, dynamic> results =
           jsonDecode(response.body) as Map<String, dynamic>;
       if (results['is_plant']) {
@@ -34,7 +59,9 @@ class APIS {
             imagePath: results['images'][0]['url'] as String,
             images: [],
             suggestions: []);
-      } else {}
+      } else {
+        print('this is not plant');
+      }
     } catch (e) {
       print(e);
     }
