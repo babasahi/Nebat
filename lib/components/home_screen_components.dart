@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:nebat/screens/home_screen.dart';
@@ -17,29 +15,34 @@ class CameraWidget extends StatefulWidget {
 class _CameraWidgetState extends State<CameraWidget> {
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: (() async {
-        APIS api = APIS();
-        setState(() {
-          image = api.pickImage() as File?;
-        });
-      }),
-      child: Container(
-        height: (MediaQuery.of(context).size.height / 1.5),
-        width: double.infinity,
-        margin: const EdgeInsets.all(22),
-        decoration: BoxDecoration(
-          borderRadius: const BorderRadius.all(Radius.circular(12)),
-          border: Border.all(width: 12, color: Colors.deepPurpleAccent),
+    return Expanded(
+      child: GestureDetector(
+        onTap: (() async {
+          APIS api = APIS();
+
+          image = await api.pickImage();
+
+          setState(() {
+            image = image;
+          });
+        }),
+        child: Container(
+          height: (MediaQuery.of(context).size.height / 3),
+          width: double.infinity,
+          margin: const EdgeInsets.all(22),
+          decoration: BoxDecoration(
+            borderRadius: const BorderRadius.all(Radius.circular(12)),
+            border: Border.all(width: 12, color: Colors.deepPurpleAccent),
+          ),
+          child: image == null
+              ? const Center(child: Icon(FontAwesomeIcons.images))
+              : Center(
+                  child: Image(
+                  image: FileImage(image!),
+                  fit: BoxFit.cover,
+                  width: double.infinity,
+                )),
         ),
-        child: image == null
-            ? const Center(child: Icon(FontAwesomeIcons.images))
-            : Center(
-                child: Image(
-                image: FileImage(image!),
-                fit: BoxFit.cover,
-                width: double.infinity,
-              )),
       ),
     );
   }
@@ -59,21 +62,24 @@ class IdentificationButton extends StatelessWidget {
             print('please capture image');
           }
         },
-        child: Material(
-          elevation: 6,
-          borderRadius: const BorderRadius.all(Radius.circular(8)),
-          child: Container(
-            padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
-            decoration: const BoxDecoration(
-                color: Colors.greenAccent,
-                // border: Border.all(color: Colors.black, width: 1),
-                borderRadius: BorderRadius.all(Radius.circular(8))),
-            height: 40,
-            child: const Text(
-              'IDENTIFY',
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
+        child: Container(
+          margin: const EdgeInsets.symmetric(vertical: 22),
+          child: Material(
+            elevation: 6,
+            borderRadius: const BorderRadius.all(Radius.circular(8)),
+            child: Container(
+              padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
+              decoration: const BoxDecoration(
+                  color: Colors.greenAccent,
+                  // border: Border.all(color: Colors.black, width: 1),
+                  borderRadius: BorderRadius.all(Radius.circular(8))),
+              height: 40,
+              child: const Text(
+                'IDENTIFY',
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
           ),
