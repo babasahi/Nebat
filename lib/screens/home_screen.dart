@@ -2,6 +2,10 @@ import 'dart:io';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:nebat/constants.dart';
+import 'package:nebat/services/apis.dart';
+
+File? image;
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -15,8 +19,15 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-          child: Column(
-        children: const [CameraWidget(), IdentificationButton()],
+          child: Container(
+        color: Colors.white,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: const [
+            CameraWidget(),
+            IdentificationButton(),
+          ],
+        ),
       )),
     );
   }
@@ -28,14 +39,29 @@ class IdentificationButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-        onTap: () {},
-        child: Container(
-            padding: const EdgeInsets.symmetric(vertical: 8),
+        onTap: () {
+          APIS api = APIS();
+          api.identifyPlant();
+        },
+        child: Material(
+          elevation: 6,
+          borderRadius: const BorderRadius.all(Radius.circular(8)),
+          child: Container(
+            padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
             decoration: const BoxDecoration(
                 color: Colors.greenAccent,
+                // border: Border.all(color: Colors.black, width: 1),
                 borderRadius: BorderRadius.all(Radius.circular(8))),
             height: 40,
-            child: const Text('IDENTIFY')));
+            child: const Text(
+              'IDENTIFY',
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+        ));
   }
 }
 
@@ -49,8 +75,6 @@ class CameraWidget extends StatefulWidget {
 }
 
 class _CameraWidgetState extends State<CameraWidget> {
-  File? image;
-
   Future<void> pickImage() async {
     final ImagePicker picker = ImagePicker();
     XFile? file = (await picker.pickImage(source: ImageSource.camera));
@@ -74,11 +98,11 @@ class _CameraWidgetState extends State<CameraWidget> {
           borderRadius: const BorderRadius.all(Radius.circular(12)),
           border: Border.all(width: 12, color: Colors.deepPurpleAccent),
         ),
-        child: image == null
+        child: resulturl.isEmpty
             ? const Center(child: Icon(FontAwesomeIcons.images))
             : Center(
                 child: Image(
-                image: FileImage(image!),
+                image: NetworkImage(resulturl),
                 fit: BoxFit.cover,
                 width: double.infinity,
               )),
