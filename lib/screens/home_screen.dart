@@ -21,10 +21,10 @@ class _HomePageState extends State<HomePage> {
         color: Colors.white,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: const [
-            PlantNameWidget(),
-            CameraWidget(),
-            IdentificationButton(),
+          children: [
+            const PlantNameWidget(),
+            const CameraWidget(),
+            image != null ? const IdentificationButton() : const SizedBox(),
           ],
         ),
       )),

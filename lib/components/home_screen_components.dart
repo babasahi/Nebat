@@ -2,9 +2,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:nebat/constants.dart';
 import 'package:nebat/screens/home_screen.dart';
 import 'package:nebat/services/apis.dart';
+import 'package:nebat/services/providers.dart';
+import 'package:provider/provider.dart';
 
 class CameraWidget extends StatefulWidget {
   const CameraWidget({
@@ -21,13 +22,7 @@ class _CameraWidgetState extends State<CameraWidget> {
     return Expanded(
       child: GestureDetector(
         onTap: (() async {
-          APIS api = APIS();
-
-          image = await api.pickImage();
-
-          setState(() {
-            image = image;
-          });
+          await Provider.of<Services>(context).pickImage();
         }),
         child: Container(
           height: (MediaQuery.of(context).size.height / 3),
@@ -60,7 +55,8 @@ class IdentificationButton extends StatelessWidget {
         onTap: () {
           if (image != null) {
             APIS api = APIS();
-            api.identifyPlant([image!]);
+            api.identifyPlant(
+                Provider.of<Services>(context, listen: false).base64Image);
           } else {
             print('please capture image');
           }
@@ -102,7 +98,17 @@ class PlantNameWidget extends StatelessWidget {
       margin: const EdgeInsets.symmetric(vertical: 22, horizontal: 22),
       height: MediaQuery.of(context).size.height / 14,
       decoration: BoxDecoration(color: Colors.black.withOpacity(0.1)),
-      child: Text(plantName.isEmpty ? '....' : plantName),
+      child: Center(
+          child: Text(
+        Provider.of<Services>(context).isImageSet
+            ? '??'
+            : (Provider.of<Services>(context).isPlant
+                ? Provider.of<Services>(context, listen: false)
+                    .plans[0]
+                    .plantName
+                : 'Not Plant !'),
+        style: const TextStyle(fontSize: 22),
+      )),
     );
   }
 }
