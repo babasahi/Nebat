@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart';
-import 'package:camera/camera.dart';
+import 'dart:io';
 
-late List<CameraDescription> cameras;
+import 'package:image_picker/image_picker.dart';
+import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -48,50 +48,25 @@ class CameraWidget extends StatefulWidget {
 }
 
 class _CameraWidgetState extends State<CameraWidget> {
-  late CameraController controller;
-  @override
-  void initState() {
-    super.initState();
-    controller = CameraController(cameras[0], ResolutionPreset.max);
-    controller.initialize().then((_) {
-      if (!mounted) {
-        return;
-      }
-      setState(() {});
-    }).catchError((Object e) {
-      if (e is CameraException) {
-        switch (e.code) {
-          case 'CameraAccessDenied':
-            print('User denied camera access.');
-            break;
-          default:
-            print('Handle other errors.');
-            break;
-        }
-      }
-    });
-  }
-
-  @override
-  void dispose() {
-    controller.dispose();
-    super.dispose();
-  }
-
+  File? image;
   @override
   Widget build(BuildContext context) {
-    if (!controller.value.isInitialized) {
-      return Container();
-    }
-
-    return Container(
-      height: (MediaQuery.of(context).size.height / 3) * 2,
-      margin: const EdgeInsets.all(22),
-      decoration: BoxDecoration(
-        borderRadius: const BorderRadius.all(Radius.circular(12)),
-        border: Border.all(width: 12, color: Colors.deepPurpleAccent),
+    return GestureDetector(
+      onTap: (() async {
+        final ImagePicker picker = ImagePicker();
+        image = (await picker.pickImage(source: ImageSource.camera)) as File?;
+      }),
+      child: Container(
+        height: (MediaQuery.of(context).size.height / 3) * 2,
+        margin: const EdgeInsets.all(22),
+        decoration: BoxDecoration(
+          borderRadius: const BorderRadius.all(Radius.circular(12)),
+          border: Border.all(width: 12, color: Colors.deepPurpleAccent),
+        ),
+        child: image == null
+            ? const Text('Gallery')
+            : Image(image: FileImage(image!)),
       ),
-      child: CameraPreview(controller),
     );
   }
 }
