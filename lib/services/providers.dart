@@ -1,4 +1,4 @@
-// ignore_for_file: avoid_print
+// ignore_for_file: avoid_print, prefer_final_fields
 
 import 'dart:convert';
 import 'dart:io';
@@ -7,12 +7,12 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:nebat/models/models.dart';
 
-class Services extends ChangeNotifier {
+class IdentificationProvider extends ChangeNotifier {
   File? _image;
-  final String _base64Image = '';
-  final bool _isImageSet = false;
-  final List<Plant> _plants = [];
-  final bool _isPlant = false;
+  String _base64Image = '';
+  bool _isImageSet = false;
+  List<Plant> _plants = [];
+  bool _isPlant = false;
 
   File get image => _image!;
   bool get isImageSet => _isImageSet;
@@ -22,12 +22,15 @@ class Services extends ChangeNotifier {
     return toBase64(image);
   }
 
-  Future<File> pickImage() async {
+  Future<void> pickImage() async {
     print('capturing image...');
     final ImagePicker picker = ImagePicker();
     XFile? file = (await picker.pickImage(source: ImageSource.camera));
     print('image captured');
-    return File(file!.path);
+    _image = File(file!.path);
+    _isImageSet = true;
+
+    notifyListeners();
   }
 
   String toBase64(File file) {

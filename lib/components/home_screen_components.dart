@@ -22,7 +22,8 @@ class _CameraWidgetState extends State<CameraWidget> {
     return Expanded(
       child: GestureDetector(
         onTap: (() async {
-          await Provider.of<Services>(context).pickImage();
+          await Provider.of<IdentificationProvider>(context, listen: false)
+              .pickImage();
         }),
         child: Container(
           height: (MediaQuery.of(context).size.height / 3),
@@ -56,7 +57,8 @@ class IdentificationButton extends StatelessWidget {
           if (image != null) {
             APIS api = APIS();
             api.identifyPlant(
-                Provider.of<Services>(context, listen: false).base64Image);
+                Provider.of<IdentificationProvider>(context, listen: false)
+                    .base64Image);
           } else {
             print('please capture image');
           }
@@ -100,13 +102,13 @@ class PlantNameWidget extends StatelessWidget {
       decoration: BoxDecoration(color: Colors.black.withOpacity(0.1)),
       child: Center(
           child: Text(
-        Provider.of<Services>(context).isImageSet
-            ? '??'
-            : (Provider.of<Services>(context).isPlant
-                ? Provider.of<Services>(context, listen: false)
+        Provider.of<IdentificationProvider>(context).isImageSet
+            ? (Provider.of<IdentificationProvider>(context).isPlant
+                ? Provider.of<IdentificationProvider>(context, listen: false)
                     .plans[0]
                     .plantName
-                : 'Not Plant !'),
+                : 'Not Plant !')
+            : 'Please Capture image',
         style: const TextStyle(fontSize: 22),
       )),
     );

@@ -1,6 +1,8 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:nebat/components/home_screen_components.dart';
+import 'package:nebat/services/providers.dart';
+import 'package:provider/provider.dart';
 
 File? image;
 
@@ -24,7 +26,9 @@ class _HomePageState extends State<HomePage> {
           children: [
             const PlantNameWidget(),
             const CameraWidget(),
-            image != null ? const IdentificationButton() : const SizedBox(),
+            Provider.of<IdentificationProvider>(context).isImageSet
+                ? const IdentificationButton()
+                : const SizedBox(),
           ],
         ),
       )),
