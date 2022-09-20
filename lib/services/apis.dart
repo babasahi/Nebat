@@ -1,26 +1,26 @@
 // ignore_for_file: avoid_print
-
 import 'dart:convert';
 import 'dart:html';
-
 import 'package:nebat/constants.dart';
 
 import 'package:http/http.dart' as http;
 import 'package:nebat/models/models.dart';
 
 class APIS {
+  final String _apikey = 'nGFgz6bm5mpkvgOVdhCdU31WjIJHEbGAOEEahX3klSkxcnsmpj';
+  final String _endpoint = 'https://api.plant.id/v2/identify';
+
   Future<void> identifyPlant() async {
-    String apikey = 'nGFgz6bm5mpkvgOVdhCdU31WjIJHEbGAOEEahX3klSkxcnsmpj';
     final base64Str = window.btoa(raw);
     List<dynamic> i = [raw, raw];
     Map<String, dynamic> body = {'images': i};
     try {
       http.Response response = await http.post(
-        Uri.parse('https://api.plant.id/v2/identify'),
+        Uri.parse(_endpoint),
         headers: {
           'Accept': '*/*',
           'Access-Control-Allow-Origin': '*',
-          'Api-Key': apikey,
+          'Api-Key': _apikey,
         },
         body: jsonEncode(body),
       );
