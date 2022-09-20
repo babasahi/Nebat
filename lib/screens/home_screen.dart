@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:nebat/components/home_screen_components.dart';
-import 'package:nebat/constants.dart';
 
 File? image;
 
@@ -22,16 +21,10 @@ class _HomePageState extends State<HomePage> {
         color: Colors.white,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            Container(
-              width: double.infinity,
-              margin: const EdgeInsets.symmetric(vertical: 22, horizontal: 22),
-              height: MediaQuery.of(context).size.height / 14,
-              decoration: BoxDecoration(color: Colors.black.withOpacity(0.1)),
-              child: Text(plantName.isEmpty ? '....' : plantName),
-            ),
-            const CameraWidget(),
-            const IdentificationButton(),
+          children: const [
+            PlantNameWidget(),
+            CameraWidget(),
+            IdentificationButton(),
           ],
         ),
       )),
