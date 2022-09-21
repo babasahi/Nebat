@@ -4,21 +4,32 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:nebat/components/home_screen_components.dart';
 import 'package:nebat/models/models.dart';
 import 'package:nebat/services/apis.dart';
 
+enum IdentificationState {
+  noimage,
+  image,
+  identified,
+}
+
 class IdentificationProvider extends ChangeNotifier {
   File? _image;
+  IdentificationState _state = IdentificationState.noimage;
   String _name = '.....';
   bool _isImageSet = false;
   List<Plant> _plants = [];
+  Widget buttonLabel =
+      const ButtonWidget(text: 'CAPTURE', icon: FontAwesomeIcons.camera);
 
   String get name => _name;
   File get image => _image!;
   bool get isImageSet => _isImageSet;
-
   List<Plant> get plants => _plants;
+  IdentificationState get state => _state;
 
   Future<void> identify() async {
     APIS api = APIS();
@@ -26,6 +37,11 @@ class IdentificationProvider extends ChangeNotifier {
       _plants = await api.identifyPlant(toBase64(_image!));
       if (_plants.isNotEmpty) {
         _name = _plants[0].plantName;
+        _state = IdentificationState.identified;
+        buttonLabel = const ButtonWidget(
+          text: 'RETRY',
+          icon: FontAwesomeIcons.refresh,
+        );
         notifyListeners();
       }
     } catch (e) {
@@ -40,6 +56,11 @@ class IdentificationProvider extends ChangeNotifier {
     print('image captured');
     _image = File(file!.path);
     _isImageSet = true;
+    _state = IdentificationState.image;
+    buttonLabel = const ButtonWidget(
+      text: 'IDENTIFY',
+      icon: FontAwesomeIcons.search,
+    );
     notifyListeners();
   }
 
