@@ -104,7 +104,11 @@ class PlantNameWidget extends StatelessWidget {
         Provider.of<IdentificationProvider>(context).isImageSet
             ? (Provider.of<IdentificationProvider>(context).name)
             : 'Please Capture image',
-        style: const TextStyle(fontSize: 22),
+        style: const TextStyle(
+            fontWeight: FontWeight.w400,
+            letterSpacing: 0.5,
+            fontSize: 32,
+            fontFamily: 'Sriracha'),
       )),
     );
   }
