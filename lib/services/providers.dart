@@ -6,20 +6,31 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:nebat/models/models.dart';
+import 'package:nebat/services/apis.dart';
 
 class IdentificationProvider extends ChangeNotifier {
   File? _image;
-  String _base64Image = '';
+  String _name = '.....';
   bool _isImageSet = false;
   List<Plant> _plants = [];
-  bool _isPlant = false;
 
+  String get name => _name;
   File get image => _image!;
   bool get isImageSet => _isImageSet;
-  bool get isPlant => _isPlant;
-  List<Plant> get plans => _plants;
-  String get base64Image {
-    return toBase64(image);
+
+  List<Plant> get plants => _plants;
+
+  Future<void> identify() async {
+    APIS api = APIS();
+    try {
+      _plants = await api.identifyPlant(toBase64(_image!));
+      if (_plants.isNotEmpty) {
+        _name = _plants[0].plantName;
+        notifyListeners();
+      }
+    } catch (e) {
+      print(e);
+    }
   }
 
   Future<void> pickImage() async {
@@ -29,7 +40,6 @@ class IdentificationProvider extends ChangeNotifier {
     print('image captured');
     _image = File(file!.path);
     _isImageSet = true;
-
     notifyListeners();
   }
 

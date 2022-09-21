@@ -2,8 +2,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:nebat/screens/home_screen.dart';
-import 'package:nebat/services/apis.dart';
 import 'package:nebat/services/providers.dart';
 import 'package:provider/provider.dart';
 
@@ -33,14 +31,16 @@ class _CameraWidgetState extends State<CameraWidget> {
             borderRadius: const BorderRadius.all(Radius.circular(12)),
             border: Border.all(width: 12, color: Colors.deepPurpleAccent),
           ),
-          child: image == null
-              ? const Center(child: Icon(FontAwesomeIcons.images))
-              : Center(
+          child: Provider.of<IdentificationProvider>(context).isImageSet
+              ? Center(
                   child: Image(
-                  image: FileImage(image!),
+                  image: FileImage(Provider.of<IdentificationProvider>(context,
+                          listen: false)
+                      .image),
                   fit: BoxFit.cover,
                   width: double.infinity,
-                )),
+                ))
+              : const Center(child: Icon(FontAwesomeIcons.images)),
         ),
       ),
     );
@@ -54,11 +54,10 @@ class IdentificationButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
         onTap: () {
-          if (image != null) {
-            APIS api = APIS();
-            api.identifyPlant(
-                Provider.of<IdentificationProvider>(context, listen: false)
-                    .base64Image);
+          if (Provider.of<IdentificationProvider>(context, listen: false)
+              .isImageSet) {
+            Provider.of<IdentificationProvider>(context, listen: false)
+                .identify();
           } else {
             print('please capture image');
           }
@@ -103,11 +102,7 @@ class PlantNameWidget extends StatelessWidget {
       child: Center(
           child: Text(
         Provider.of<IdentificationProvider>(context).isImageSet
-            ? (Provider.of<IdentificationProvider>(context).isPlant
-                ? Provider.of<IdentificationProvider>(context, listen: false)
-                    .plans[0]
-                    .plantName
-                : 'Not Plant !')
+            ? (Provider.of<IdentificationProvider>(context).name)
             : 'Please Capture image',
         style: const TextStyle(fontSize: 22),
       )),

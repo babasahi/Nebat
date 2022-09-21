@@ -1,10 +1,7 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:nebat/components/home_screen_components.dart';
 import 'package:nebat/services/providers.dart';
 import 'package:provider/provider.dart';
-
-File? image;
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
