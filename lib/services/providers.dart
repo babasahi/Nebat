@@ -44,7 +44,7 @@ class IdentificationProvider extends ChangeNotifier {
         _state = IdentificationState.identified;
         buttonLabel = const ButtonWidget(
           text: 'RETRY',
-          icon: FontAwesomeIcons.refresh,
+          icon: FontAwesomeIcons.arrowsRotate,
         );
         _isLoading = false;
 
@@ -67,7 +67,7 @@ class IdentificationProvider extends ChangeNotifier {
     _state = IdentificationState.image;
     buttonLabel = const ButtonWidget(
       text: 'IDENTIFY',
-      icon: FontAwesomeIcons.search,
+      icon: FontAwesomeIcons.magnifyingGlass,
     );
     notifyListeners();
   }

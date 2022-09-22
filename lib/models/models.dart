@@ -2,6 +2,7 @@ class Plant {
   final int id;
   final String plantName;
   final String imagePath;
+  final double probability;
   final List<String> images;
   final List<Suggestion> suggestions;
 
@@ -10,6 +11,7 @@ class Plant {
       required this.plantName,
       required this.imagePath,
       required this.images,
+      required this.probability,
       required this.suggestions});
 }
 

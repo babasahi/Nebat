@@ -36,6 +36,7 @@ class APIS {
           Map<String, dynamic> plant = suggesstion as Map<String, dynamic>;
           plants.add(Plant(
               id: plant['id'] as int,
+              probability: plant['probability'] as double,
               plantName: plant['plant_name'] as String,
               imagePath: results['images'][0]['url'] as String,
               images: [],
