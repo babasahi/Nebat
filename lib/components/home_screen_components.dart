@@ -17,31 +17,32 @@ class CameraWidget extends StatefulWidget {
 class _CameraWidgetState extends State<CameraWidget> {
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: GestureDetector(
-        onTap: (() async {
-          await Provider.of<IdentificationProvider>(context, listen: false)
-              .pickImage();
-        }),
-        child: Container(
-          height: (MediaQuery.of(context).size.height / 3),
-          width: double.infinity,
-          margin: const EdgeInsets.all(22),
-          decoration: BoxDecoration(
-            borderRadius: const BorderRadius.all(Radius.circular(12)),
-            border: Border.all(width: 12, color: Colors.deepPurpleAccent),
-          ),
-          child: Provider.of<IdentificationProvider>(context).isImageSet
-              ? Center(
-                  child: Image(
-                  image: FileImage(Provider.of<IdentificationProvider>(context,
-                          listen: false)
-                      .image),
-                  fit: BoxFit.cover,
-                  width: double.infinity,
-                ))
-              : const Center(child: Icon(FontAwesomeIcons.images)),
+    return GestureDetector(
+      onTap: (() async {
+        await Provider.of<IdentificationProvider>(context, listen: false)
+            .pickImage();
+      }),
+      child: Container(
+        width: double.infinity,
+        height: Provider.of<IdentificationProvider>(context).plants.isEmpty
+            ? MediaQuery.of(context).size.height / 1.5
+            : MediaQuery.of(context).size.height / 2.5,
+        margin: const EdgeInsets.symmetric(horizontal: 20),
+        decoration: BoxDecoration(
+          borderRadius: const BorderRadius.all(Radius.circular(12)),
+          border: Border.all(width: 12, color: Colors.deepPurpleAccent),
         ),
+        child: Provider.of<IdentificationProvider>(context).isImageSet
+            ? Center(
+                child: Image(
+                height: double.infinity,
+                image: FileImage(
+                    Provider.of<IdentificationProvider>(context, listen: false)
+                        .image),
+                fit: BoxFit.cover,
+                width: double.infinity,
+              ))
+            : const Center(child: Icon(FontAwesomeIcons.images)),
       ),
     );
   }
@@ -70,7 +71,8 @@ class IdentificationButton extends StatelessWidget {
           buttonTriggered(context);
         },
         child: Container(
-          margin: const EdgeInsets.symmetric(vertical: 22),
+          margin: EdgeInsets.symmetric(
+              vertical: 22, horizontal: MediaQuery.of(context).size.width / 3),
           child: Material(
             elevation: 6,
             borderRadius: const BorderRadius.all(Radius.circular(8)),
