@@ -129,6 +129,7 @@ class ButtonWidget extends StatelessWidget {
             text,
             style: const TextStyle(
               fontSize: 20,
+              fontFamily: 'Poppins',
               fontWeight: FontWeight.bold,
             ),
           ),

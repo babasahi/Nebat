@@ -18,6 +18,7 @@ enum IdentificationState {
 
 class IdentificationProvider extends ChangeNotifier {
   File? _image;
+  bool _isLoading = false;
   IdentificationState _state = IdentificationState.noimage;
   String _name = '.....';
   bool _isImageSet = false;
@@ -26,6 +27,7 @@ class IdentificationProvider extends ChangeNotifier {
       const ButtonWidget(text: 'CAPTURE', icon: FontAwesomeIcons.camera);
 
   String get name => _name;
+  bool get isLoading => _isLoading;
   File get image => _image!;
   bool get isImageSet => _isImageSet;
   List<Plant> get plants => _plants;
@@ -34,6 +36,8 @@ class IdentificationProvider extends ChangeNotifier {
   Future<void> identify() async {
     APIS api = APIS();
     try {
+      _isLoading = true;
+      notifyListeners();
       _plants = await api.identifyPlant(toBase64(_image!));
       if (_plants.isNotEmpty) {
         _name = _plants[0].plantName;
@@ -42,9 +46,13 @@ class IdentificationProvider extends ChangeNotifier {
           text: 'RETRY',
           icon: FontAwesomeIcons.refresh,
         );
+        _isLoading = false;
+
         notifyListeners();
       }
     } catch (e) {
+      _isLoading = false;
+      notifyListeners();
       print(e);
     }
   }
