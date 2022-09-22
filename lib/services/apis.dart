@@ -31,13 +31,16 @@ class APIS {
       Map<String, dynamic> results =
           jsonDecode(response.body) as Map<String, dynamic>;
       if (results['is_plant']) {
-        Map<String, dynamic> s = results['suggestions'][0];
-        plants.add(Plant(
-            id: s['id'] as int,
-            plantName: s['plant_name'] as String,
-            imagePath: results['images'][0]['url'] as String,
-            images: [],
-            suggestions: []));
+        List<dynamic> suggesstions = results['suggestions'];
+        for (var suggesstion in suggesstions) {
+          Map<String, dynamic> plant = suggesstion as Map<String, dynamic>;
+          plants.add(Plant(
+              id: plant['id'] as int,
+              plantName: plant['plant_name'] as String,
+              imagePath: results['images'][0]['url'] as String,
+              images: [],
+              suggestions: []));
+        }
 
         return plants;
       } else {

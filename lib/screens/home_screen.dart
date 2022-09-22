@@ -24,11 +24,18 @@ class _HomePageState extends State<HomePage> {
         child: SafeArea(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: const [
-              PlantNameWidget(),
-              CameraWidget(),
-              IdentificationButton(),
-              SuggestionsWidget(),
+            children: [
+              const PlantNameWidget(),
+              const CameraWidget(),
+              Provider.of<IdentificationProvider>(context).state ==
+                      IdentificationState.identified
+                  ? const SizedBox()
+                  : const IdentificationButton(),
+              const SuggestionsWidget(),
+              Provider.of<IdentificationProvider>(context).state ==
+                      IdentificationState.identified
+                  ? const IdentificationButton()
+                  : const SizedBox(),
             ],
           ),
         ),
@@ -53,7 +60,7 @@ class _SuggestionsWidgetState extends State<SuggestionsWidget> {
               margin: const EdgeInsets.symmetric(vertical: 12, horizontal: 8),
               child: Material(
                 borderRadius: const BorderRadius.all(Radius.circular(12)),
-                elevation: 4,
+                elevation: 2,
                 child: Container(
                   decoration: const BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.circular(12)),
