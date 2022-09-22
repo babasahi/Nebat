@@ -36,7 +36,7 @@ class APIS {
           Map<String, dynamic> plant = suggesstion as Map<String, dynamic>;
           plants.add(Plant(
               id: plant['id'] as int,
-              probability: plant['probability'] as double,
+              probability: (plant['probability'] as double) * 100,
               plantName: plant['plant_name'] as String,
               imagePath: results['images'][0]['url'] as String,
               images: [],
@@ -52,5 +52,35 @@ class APIS {
       print(e);
       return plants;
     }
+  }
+
+  Future<String> getHTMLDoc(String query) async {
+    String url = 'https://www.google.com/search?q=$query&source=lnms&tbm=isch';
+    Map<String, String> headers = {
+      'Accept': '*/*',
+      'Access-Control-Allow-Origin': '*',
+      'User-Agent':
+          "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.134 Safari/537.36"
+    };
+
+    Map<String, dynamic> body = {'': ''};
+    try {
+      print('sending request...');
+      http.Response response = await http.post(
+        Uri.parse(url),
+        headers: headers,
+        body: jsonEncode(body),
+      );
+      print('got response ');
+      print(response.body);
+    } catch (e) {
+      print(e);
+    }
+
+    return '';
+  }
+
+  Future<String> getImageFromWeb(String query) async {
+    return '';
   }
 }

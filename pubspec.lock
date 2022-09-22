@@ -8,6 +8,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.9.0"
+  beautiful_soup_dart:
+    dependency: "direct main"
+    description:
+      name: beautiful_soup_dart
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.3.0"
   boolean_selector:
     dependency: transitive
     description:
@@ -43,6 +50,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.3.3+2"
+  csslib:
+    dependency: transitive
+    description:
+      name: csslib
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.17.2"
   cupertino_icons:
     dependency: "direct main"
     description:
@@ -93,6 +107,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "10.2.1"
+  html:
+    dependency: transitive
+    description:
+      name: html
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.15.0"
   http:
     dependency: "direct main"
     description:

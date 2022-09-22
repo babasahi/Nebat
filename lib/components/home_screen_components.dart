@@ -168,7 +168,7 @@ class _SuggestionsWidgetState extends State<SuggestionsWidget> {
                     borderRadius: BorderRadius.all(Radius.circular(12)),
                     color: Colors.white,
                   ),
-                  padding: const EdgeInsets.symmetric(vertical: 42),
+                  padding: const EdgeInsets.symmetric(vertical: 22),
                   child: ListView.builder(
                       scrollDirection: Axis.horizontal,
                       itemCount: Provider.of<IdentificationProvider>(context,
@@ -206,17 +206,29 @@ class PlantSuggestionWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(vertical: 4, horizontal: 2),
+      margin: const EdgeInsets.symmetric(vertical: 0, horizontal: 2),
       height: 24,
-      decoration: BoxDecoration(color: Colors.blueAccent.withOpacity(0.4)),
+      decoration: BoxDecoration(
+          borderRadius: const BorderRadius.all(Radius.circular(8)),
+          border: Border.all(),
+          color: Colors.blueAccent.withOpacity(0.4)),
       padding: const EdgeInsets.all(4),
       child: Stack(children: [
-        Image(image: NetworkImage(plant.imagePath)),
+        // Image(image: NetworkImage(plant.imagePath)),
         Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(plant.plantName),
-            Text(plant.probability.toString()),
+            Text(
+              plant.plantName,
+              style: const TextStyle(fontSize: 18, fontFamily: 'Sriracha'),
+            ),
+            Text(
+              plant.probability.toStringAsFixed(3),
+              style: const TextStyle(
+                  fontSize: 18,
+                  fontFamily: 'Cairo',
+                  fontWeight: FontWeight.bold),
+            ),
           ],
         )
       ]),

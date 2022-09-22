@@ -2,7 +2,6 @@
 
 import 'dart:convert';
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:image_picker/image_picker.dart';
@@ -38,7 +37,9 @@ class IdentificationProvider extends ChangeNotifier {
     try {
       _isLoading = true;
       notifyListeners();
-      _plants = await api.identifyPlant(toBase64(_image!));
+      _plants = await api.identifyPlant(toBase64(
+        _image!,
+      ));
       if (_plants.isNotEmpty) {
         _name = _plants[0].plantName;
         _state = IdentificationState.identified;
@@ -73,8 +74,6 @@ class IdentificationProvider extends ChangeNotifier {
   }
 
   String toBase64(File file) {
-    print('converting image to base64...');
-
     List<int> bytes = image.readAsBytesSync();
     print('converted image to base64');
     return base64Encode(bytes);
