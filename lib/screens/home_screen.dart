@@ -16,18 +16,19 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: ModalProgressHUD(
+        progressIndicator: const CircularProgressIndicator(
+          color: Colors.greenAccent,
+        ),
         inAsyncCall: Provider.of<IdentificationProvider>(context).isLoading,
         child: SafeArea(
           child: Container(
             color: Colors.white,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                const PlantNameWidget(),
-                const CameraWidget(),
-                Provider.of<IdentificationProvider>(context).isImageSet
-                    ? const IdentificationButton()
-                    : const SizedBox(),
+              children: const [
+                PlantNameWidget(),
+                CameraWidget(),
+                IdentificationButton()
               ],
             ),
           ),

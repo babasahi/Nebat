@@ -75,11 +75,6 @@ class IdentificationButton extends StatelessWidget {
             elevation: 6,
             borderRadius: const BorderRadius.all(Radius.circular(8)),
             child: Container(
-                padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
-                decoration: const BoxDecoration(
-                    color: Colors.greenAccent,
-                    borderRadius: BorderRadius.all(Radius.circular(8))),
-                height: 40,
                 child:
                     Provider.of<IdentificationProvider>(context).buttonLabel),
           ),
@@ -120,20 +115,28 @@ class ButtonWidget extends StatelessWidget {
   final IconData icon;
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: MediaQuery.of(context).size.width / 3.5,
+    return Container(
+      decoration: const BoxDecoration(
+          color: Colors.greenAccent,
+          borderRadius: BorderRadius.all(Radius.circular(8))),
+      padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 4),
+      width: MediaQuery.of(context).size.width / 3,
       child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           Text(
             text,
             style: const TextStyle(
-              fontSize: 20,
+              fontSize: 24,
               fontFamily: 'Poppins',
               fontWeight: FontWeight.bold,
             ),
           ),
-          Icon(icon)
+          Icon(
+            icon,
+            size: 22,
+          )
         ],
       ),
     );
