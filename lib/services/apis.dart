@@ -4,7 +4,7 @@ import 'package:beautiful_soup_dart/beautiful_soup.dart';
 import 'package:http/http.dart' as http;
 import 'package:nebat/models/models.dart';
 
-class APIS {
+class PlantsAPI {
   final String _apikey = 'nGFgz6bm5mpkvgOVdhCdU31WjIJHEbGAOEEahX3klSkxcnsmpj';
   final String _endpoint = 'https://api.plant.id/v2/identify';
 
@@ -85,3 +85,5 @@ class APIS {
     return '';
   }
 }
+
+class PlantsDatabase {}

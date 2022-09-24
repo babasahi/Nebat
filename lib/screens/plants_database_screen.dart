@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:nebat/models/models.dart';
-import 'package:nebat/services/apis.dart';
 import 'package:nebat/services/providers.dart';
 import 'package:provider/provider.dart';
 
@@ -23,9 +22,11 @@ class _PlantsDatabasePageState extends State<PlantsDatabasePage> {
             .plants(),
         builder: ((context, AsyncSnapshot<List<Plant>> snapshot) {
           if (snapshot.hasData) {
-            return ListView.builder(itemBuilder: ((context, index) {
-              return const Text('data');
-            }));
+            return ListView.builder(
+                itemCount: snapshot.data!.length,
+                itemBuilder: ((context, index) {
+                  return const Text('data');
+                }));
           } else {
             return const Text('data');
           }

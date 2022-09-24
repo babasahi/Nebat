@@ -25,6 +25,7 @@ dependencies:
   provider: ^6.0.3
   modal_progress_hud_nsn: ^0.3.0
   beautiful_soup_dart: ^0.3.0
+  firebase_core: ^1.23.0
 
 dev_dependencies:
   flutter_test:

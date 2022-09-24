@@ -21,10 +21,12 @@ class _HomePageState extends State<HomePage> {
         actions: [
           GestureDetector(
             onTap: (() {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: ((context) => const PlantsDatabasePage())));
+              Navigator.push(context, MaterialPageRoute(builder: ((context) {
+                return ChangeNotifierProvider(
+                  create: (context) => PlantsDatabaseProvider(),
+                  builder: (context, child) => const PlantsDatabasePage(),
+                );
+              })));
             }),
             child: const Padding(
               padding: EdgeInsets.all(8.0),

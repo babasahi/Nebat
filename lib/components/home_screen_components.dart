@@ -26,8 +26,8 @@ class _CameraWidgetState extends State<CameraWidget> {
       child: Container(
         width: double.infinity,
         height: Provider.of<IdentificationProvider>(context).plants.isEmpty
-            ? MediaQuery.of(context).size.height / 1.5
-            : MediaQuery.of(context).size.height / 2.5,
+            ? MediaQuery.of(context).size.height / 1.6
+            : MediaQuery.of(context).size.height / 2.6,
         margin: const EdgeInsets.symmetric(horizontal: 20),
         decoration: BoxDecoration(
           borderRadius: const BorderRadius.all(Radius.circular(12)),

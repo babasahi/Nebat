@@ -15,6 +15,12 @@ enum IdentificationState {
   identified,
 }
 
+List<Plant> plantMapsToModels(List<Map<String, dynamic>> mapsList) {
+  List<Plant> plants = [];
+  for (var map in mapsList) {}
+  return [];
+}
+
 class IdentificationProvider extends ChangeNotifier {
   File? _image;
   bool _isLoading = false;
@@ -33,7 +39,7 @@ class IdentificationProvider extends ChangeNotifier {
   IdentificationState get state => _state;
 
   Future<void> identify() async {
-    APIS api = APIS();
+    PlantsAPI api = PlantsAPI();
     try {
       _isLoading = true;
       notifyListeners();
