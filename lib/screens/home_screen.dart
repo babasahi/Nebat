@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:nebat/components/home_screen_components.dart';
+import 'package:nebat/screens/plants_database_screen.dart';
 import 'package:nebat/services/providers.dart';
 import 'package:provider/provider.dart';
 
@@ -19,6 +20,12 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         actions: [
           GestureDetector(
+            onTap: (() {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: ((context) => const PlantsDatabasePage())));
+            }),
             child: const Padding(
               padding: EdgeInsets.all(8.0),
               child: Icon(FontAwesomeIcons.list),
