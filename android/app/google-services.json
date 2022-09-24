@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "756938865396",
+    "project_id": "nebat-ae947",
+    "storage_bucket": "nebat-ae947.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:756938865396:android:dde61453c14adfa97b7ca1",
+        "android_client_info": {
+          "package_name": "com.example.nebat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "756938865396-ul7v03fqflgsgq6io8779lbdgej9ev19.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCfED3voWWLQSVLfohyncmxatY9QyrHbAI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "756938865396-ul7v03fqflgsgq6io8779lbdgej9ev19.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

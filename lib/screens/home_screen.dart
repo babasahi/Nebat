@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:nebat/components/home_screen_components.dart';
 import 'package:nebat/services/providers.dart';
@@ -15,6 +16,16 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        actions: [
+          GestureDetector(
+            child: const Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Icon(FontAwesomeIcons.list),
+            ),
+          )
+        ],
+      ),
       body: ModalProgressHUD(
         progressIndicator: const CircularProgressIndicator(
           color: Colors.greenAccent,

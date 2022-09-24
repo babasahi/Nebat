@@ -1,6 +1,6 @@
 // ignore_for_file: avoid_print
 import 'dart:convert';
-
+import 'package:beautiful_soup_dart/beautiful_soup.dart';
 import 'package:http/http.dart' as http;
 import 'package:nebat/models/models.dart';
 
@@ -63,13 +63,11 @@ class APIS {
           "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.134 Safari/537.36"
     };
 
-    Map<String, dynamic> body = {'': ''};
     try {
       print('sending request...');
       http.Response response = await http.post(
         Uri.parse(url),
         headers: headers,
-        body: jsonEncode(body),
       );
       print('got response ');
       print(response.body);
@@ -81,6 +79,9 @@ class APIS {
   }
 
   Future<String> getImageFromWeb(String query) async {
+    String html = await getHTMLDoc(query);
+    BeautifulSoup bs = BeautifulSoup(html);
+    print(bs.find('url'));
     return '';
   }
 }

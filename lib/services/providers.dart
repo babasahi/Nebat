@@ -79,3 +79,9 @@ class IdentificationProvider extends ChangeNotifier {
     return base64Encode(bytes);
   }
 }
+
+class PlantsDatabaseProvider extends ChangeNotifier {
+  Future<List<Plant>> plants() async {
+    return [];
+  }
+}
