@@ -1,4 +1,5 @@
 // ignore_for_file: avoid_print
+
 import 'package:flutter/material.dart';
 import 'package:nebat/screens/home_screen.dart';
 import 'package:nebat/services/providers.dart';
@@ -18,38 +19,39 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  Location location = Location();
 
-  Location location =  Location();
+  bool _serviceEnabled = false;
+  late PermissionStatus _permissionGranted;
+  late LocationData _locationData;
 
-bool _serviceEnabled =false;
-late PermissionStatus _permissionGranted;
-late LocationData _locationData;
+  getLocatio() async {
+    _serviceEnabled = await location.serviceEnabled();
+    if (!_serviceEnabled) {
+      _serviceEnabled = await location.requestService();
+      if (!_serviceEnabled) {
+        return;
+      }
+    }
 
+    PermissionStatus permissionGranted = await location.hasPermission();
+    if (permissionGranted == PermissionStatus.denied) {
+      permissionGranted = await location.requestPermission();
+      if (permissionGranted != PermissionStatus.granted) {
+        return;
+      }
+    }
 
-
-_serviceEnabled = await location.serviceEnabled();
-if (!_serviceEnabled) {
-  _serviceEnabled = await location.requestService();
-  if (!_serviceEnabled) {
-    return;
+    _locationData = await location.getLocation();
   }
-}
 
-final _permissionGranted = await location.hasPermission();
-if (permissionGranted == PermissionStatus.denied) {
-  permissionGranted = await location.requestPermission();
-  if (permissionGranted != PermissionStatus.granted) {
-    return;
-  }
-}
-
-final _locationData = await location.getLocation();
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: ChangeNotifierProvider(
-        create: (context) => IdentificationProvider(),
+        create: (context) =>
+            IdentificationProvider(locationData: _locationData),
         builder: ((context, child) {
           return const HomePage();
         }),

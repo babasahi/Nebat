@@ -5,6 +5,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:location/location.dart';
 import 'package:nebat/components/home_screen_components.dart';
 import 'package:nebat/models/models.dart';
 import 'package:nebat/services/apis.dart';
@@ -28,9 +29,10 @@ class IdentificationProvider extends ChangeNotifier {
   String _name = '.....';
   bool _isImageSet = false;
   List<Plant> _plants = [];
+  LocationData locationData;
   Widget buttonLabel =
       const ButtonWidget(text: 'CAPTURE', icon: FontAwesomeIcons.camera);
-
+  IdentificationProvider({required this.locationData});
   String get name => _name;
   bool get isLoading => _isLoading;
   File get image => _image!;
