@@ -101,10 +101,12 @@ class IdentificationProvider extends ChangeNotifier {
     }
   }
 
+  Future<void> addPlantToDatabase(Plant plant) async {
+    PlantsDatabase db = PlantsDatabase();
+    db.addPlantToDatabase(plant);
+  }
+
   Future<void> pickImage() async {
-    PlantsAPI api = PlantsAPI();
-    api.getImageFromWeb('xbox');
-    print(_position);
     // print('capturing image...');
     // final ImagePicker picker = ImagePicker();
     // XFile? file = (await picker.pickImage(source: ImageSource.camera));

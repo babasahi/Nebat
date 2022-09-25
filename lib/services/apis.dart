@@ -1,6 +1,7 @@
 // ignore_for_file: avoid_print
 import 'dart:convert';
 import 'package:beautiful_soup_dart/beautiful_soup.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:http/http.dart' as http;
 import 'package:nebat/models/models.dart';
 
@@ -70,8 +71,7 @@ class PlantsAPI {
         Uri.parse(url),
         headers: headers,
       );
-      print('got response ');
-      // log(response.body);
+
       result = response.body;
     } catch (e) {
       print(e);
@@ -90,4 +90,13 @@ class PlantsAPI {
   }
 }
 
-class PlantsDatabase {}
+class PlantsDatabase {
+  final plantsdb = FirebaseFirestore.instance.collection('plants');
+  Future<void> addPlantToDatabase(Plant newPlant) async {
+    try {
+      await plantsdb.add(newPlant.toJson());
+    } catch (e) {
+      print(e);
+    }
+  }
+}
