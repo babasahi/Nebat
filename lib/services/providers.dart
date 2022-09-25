@@ -4,7 +4,6 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:location/location.dart';
 import 'package:nebat/components/home_screen_components.dart';
 import 'package:nebat/models/models.dart';
@@ -29,7 +28,7 @@ class IdentificationProvider extends ChangeNotifier {
   String _name = '.....';
   bool _isImageSet = false;
   List<Plant> _plants = [];
-  LocationData locationData;
+  LocationData? locationData;
   Widget buttonLabel =
       const ButtonWidget(text: 'CAPTURE', icon: FontAwesomeIcons.camera);
   IdentificationProvider({required this.locationData});
@@ -67,18 +66,19 @@ class IdentificationProvider extends ChangeNotifier {
   }
 
   Future<void> pickImage() async {
-    print('capturing image...');
-    final ImagePicker picker = ImagePicker();
-    XFile? file = (await picker.pickImage(source: ImageSource.camera));
-    print('image captured');
-    _image = File(file!.path);
-    _isImageSet = true;
-    _state = IdentificationState.image;
-    buttonLabel = const ButtonWidget(
-      text: 'IDENTIFY',
-      icon: FontAwesomeIcons.magnifyingGlass,
-    );
-    notifyListeners();
+    print(locationData);
+    // print('capturing image...');
+    // final ImagePicker picker = ImagePicker();
+    // XFile? file = (await picker.pickImage(source: ImageSource.camera));
+    // print('image captured');
+    // _image = File(file!.path);
+    // _isImageSet = true;
+    // _state = IdentificationState.image;
+    // buttonLabel = const ButtonWidget(
+    //   text: 'IDENTIFY',
+    //   icon: FontAwesomeIcons.magnifyingGlass,
+    // );
+    // notifyListeners();
   }
 
   String toBase64(File file) {

@@ -23,9 +23,9 @@ class _MyAppState extends State<MyApp> {
 
   bool _serviceEnabled = false;
   late PermissionStatus _permissionGranted;
-  late LocationData _locationData;
+  LocationData? _locationData;
 
-  getLocatio() async {
+  getLocation() async {
     _serviceEnabled = await location.serviceEnabled();
     if (!_serviceEnabled) {
       _serviceEnabled = await location.requestService();
@@ -34,15 +34,24 @@ class _MyAppState extends State<MyApp> {
       }
     }
 
-    PermissionStatus permissionGranted = await location.hasPermission();
-    if (permissionGranted == PermissionStatus.denied) {
-      permissionGranted = await location.requestPermission();
-      if (permissionGranted != PermissionStatus.granted) {
-        return;
+    _permissionGranted = await location.hasPermission();
+    if (_permissionGranted == PermissionStatus.denied) {
+      _permissionGranted = await location.requestPermission();
+      int x = 1;
+      for (int i = 0; i < x; i++) {
+        if (_permissionGranted != PermissionStatus.granted) {
+          x++;
+        } else {
+          _locationData = await location.getLocation();
+        }
       }
     }
+  }
 
-    _locationData = await location.getLocation();
+  @override
+  void initState() {
+    getLocation();
+    super.initState();
   }
 
   @override
