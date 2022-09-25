@@ -1,9 +1,9 @@
 // ignore_for_file: avoid_print
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:nebat/screens/home_screen.dart';
 import 'package:nebat/services/providers.dart';
 import 'package:provider/provider.dart';
-import 'package:location/location.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,38 +17,48 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  Location location = Location();
+  late Position _position;
 
-  bool _serviceEnabled = false;
-  late PermissionStatus _permissionGranted;
-  LocationData? _locationData;
+  Future<Position> _determinePosition() async {
+    bool serviceEnabled;
+    LocationPermission permission;
 
-  getLocation() async {
-    _serviceEnabled = await location.serviceEnabled();
-    if (!_serviceEnabled) {
-      _serviceEnabled = await location.requestService();
-      if (!_serviceEnabled) {
-        return;
+    // Test if location services are enabled.
+    serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) {
+      // Location services are not enabled don't continue
+      // accessing the position and request users of the
+      // App to enable the location services.
+      return Future.error('Location services are disabled.');
+    }
+
+    permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) {
+        // Permissions are denied, next time you could try
+        // requesting permissions again (this is also where
+        // Android's shouldShowRequestPermissionRationale
+        // returned true. According to Android guidelines
+        // your App should show an explanatory UI now.
+        return Future.error('Location permissions are denied');
       }
     }
 
-    _permissionGranted = await location.hasPermission();
-    if (_permissionGranted == PermissionStatus.denied) {
-      _permissionGranted = await location.requestPermission();
-      int x = 1;
-      for (int i = 0; i < x; i++) {
-        if (_permissionGranted != PermissionStatus.granted) {
-          x++;
-        } else {
-          _locationData = await location.getLocation();
-        }
-      }
+    if (permission == LocationPermission.deniedForever) {
+      // Permissions are denied forever, handle appropriately.
+      return Future.error(
+          'Location permissions are permanently denied, we cannot request permissions.');
     }
+
+    // When we reach here, permissions are granted and we can
+    // continue accessing the position of the device.
+    return await Geolocator.getCurrentPosition();
   }
 
   @override
-  void initState() {
-    getLocation();
+  void initState() async {
+    _position = await _determinePosition();
     super.initState();
   }
 
@@ -57,8 +67,7 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: ChangeNotifierProvider(
-        create: (context) =>
-            IdentificationProvider(locationData: _locationData),
+        create: (context) => IdentificationProvider(position: _position),
         builder: ((context, child) {
           return const HomePage();
         }),

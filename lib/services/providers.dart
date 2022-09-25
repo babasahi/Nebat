@@ -1,10 +1,10 @@
 // ignore_for_file: avoid_print, prefer_final_fields
-
+import 'package:geolocator/geolocator.dart';
 import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:location/location.dart';
+
 import 'package:nebat/components/home_screen_components.dart';
 import 'package:nebat/models/models.dart';
 import 'package:nebat/services/apis.dart';
@@ -28,10 +28,10 @@ class IdentificationProvider extends ChangeNotifier {
   String _name = '.....';
   bool _isImageSet = false;
   List<Plant> _plants = [];
-  LocationData? locationData;
+  final Position position;
   Widget buttonLabel =
       const ButtonWidget(text: 'CAPTURE', icon: FontAwesomeIcons.camera);
-  IdentificationProvider({required this.locationData});
+  IdentificationProvider({required this.position});
   String get name => _name;
   bool get isLoading => _isLoading;
   File get image => _image!;
@@ -39,6 +39,7 @@ class IdentificationProvider extends ChangeNotifier {
   List<Plant> get plants => _plants;
   IdentificationState get state => _state;
 
+  init() {}
   Future<void> identify() async {
     PlantsAPI api = PlantsAPI();
     try {
@@ -66,7 +67,7 @@ class IdentificationProvider extends ChangeNotifier {
   }
 
   Future<void> pickImage() async {
-    print(locationData);
+    print(position);
     // print('capturing image...');
     // final ImagePicker picker = ImagePicker();
     // XFile? file = (await picker.pickImage(source: ImageSource.camera));
