@@ -21,8 +21,6 @@ class _HomePageState extends State<HomePage> {
         actions: [
           GestureDetector(
             onTap: (() async {
-              Provider.of<IdentificationProvider>(context, listen: false)
-                  .determinePosition();
               Navigator.push(context, MaterialPageRoute(builder: ((context) {
                 return ChangeNotifierProvider(
                   create: (context) => PlantsDatabaseProvider(),

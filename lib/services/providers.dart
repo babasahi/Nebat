@@ -102,6 +102,8 @@ class IdentificationProvider extends ChangeNotifier {
   }
 
   Future<void> pickImage() async {
+    await determinePosition();
+    print(_position);
     // print('capturing image...');
     // final ImagePicker picker = ImagePicker();
     // XFile? file = (await picker.pickImage(source: ImageSource.camera));
