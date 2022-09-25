@@ -55,6 +55,7 @@ class PlantsAPI {
   }
 
   Future<String> getHTMLDoc(String query) async {
+    String result = '';
     String url = 'https://www.google.com/search?q=$query&source=lnms&tbm=isch';
     Map<String, String> headers = {
       'Accept': '*/*',
@@ -65,23 +66,26 @@ class PlantsAPI {
 
     try {
       print('sending request...');
-      http.Response response = await http.post(
+      http.Response response = await http.get(
         Uri.parse(url),
         headers: headers,
       );
       print('got response ');
-      print(response.body);
+      // log(response.body);
+      result = response.body;
     } catch (e) {
       print(e);
     }
 
-    return '';
+    return result;
   }
 
   Future<String> getImageFromWeb(String query) async {
     String html = await getHTMLDoc(query);
     BeautifulSoup bs = BeautifulSoup(html);
-    print(bs.find('url'));
+    String r = bs.find('img', class_: 'yWs4tf').toString();
+    print(r.split('src="').last.split(';').first);
+
     return '';
   }
 }

@@ -102,7 +102,8 @@ class IdentificationProvider extends ChangeNotifier {
   }
 
   Future<void> pickImage() async {
-    await determinePosition();
+    PlantsAPI api = PlantsAPI();
+    api.getImageFromWeb('xbox');
     print(_position);
     // print('capturing image...');
     // final ImagePicker picker = ImagePicker();

@@ -27,6 +27,7 @@ dependencies:
   beautiful_soup_dart: ^0.3.0
   firebase_core: ^1.23.0
   geolocator: ^9.0.2
+  cloud_firestore: ^3.4.9
 
 dev_dependencies:
   flutter_test:
