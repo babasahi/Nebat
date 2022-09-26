@@ -28,6 +28,8 @@ dependencies:
   firebase_core: ^1.23.0
   geolocator: ^9.0.2
   cloud_firestore: ^3.4.9
+  firebase_storage: ^10.3.9
+  cached_network_image: ^3.2.2
 
 dev_dependencies:
   flutter_test:
