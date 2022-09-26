@@ -94,9 +94,30 @@ class PlantsDatabase {
   final plantsdb = FirebaseFirestore.instance.collection('plants');
   Future<void> addPlantToDatabase(Plant newPlant) async {
     try {
-      await plantsdb.add(newPlant.toJson());
+      await plantsdb.doc(newPlant.id.toString()).set(newPlant.toJson());
     } catch (e) {
       print(e);
     }
+  }
+
+  Future<Plant> getPlant(int plantId) async {
+    var raw = await plantsdb.doc(plantId.toString()).get();
+    Map<String, dynamic> object = raw as Map<String, dynamic>;
+    return Plant.fromJson(object);
+  }
+
+  Future<List<Plant>> getAllPlants() async {
+    List<Map<String, dynamic>> data = [];
+    List<Plant> plants = [];
+    QuerySnapshot<Map<String, dynamic>> rawdata = await plantsdb.get();
+    var objects = rawdata.docs;
+    objects.map((e) {
+      data.add(e as Map<String, dynamic>);
+    });
+
+    for (var plant in data) {
+      plants.add(Plant.fromJson(plant));
+    }
+    return plants;
   }
 }
