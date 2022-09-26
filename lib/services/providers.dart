@@ -4,7 +4,6 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
 import 'package:nebat/components/home_screen_components.dart';
 import 'package:nebat/models/models.dart';
 import 'package:nebat/services/apis.dart';
