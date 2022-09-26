@@ -1,23 +1,15 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_test/flutter_test.dart';
-
-import 'package:nebat/main.dart';
-
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
-
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
-
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
-
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
-  });
+//   test('if InPolygon', () {
+//     expect(
+//         inPolygon(Position(
+//             longitude: -3.831677,
+//             latitude: 21.920758,
+//             timestamp: DateTime.now(),
+//             accuracy: 0.0,
+//             altitude: 0.0,
+//             heading: 0.0,
+//             speed: 0.0,
+//             speedAccuracy: 0.0)),
+//         false);
+//   });
 }

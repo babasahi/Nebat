@@ -128,14 +128,8 @@ class IdentificationProvider extends ChangeNotifier {
 }
 
 class PlantsDatabaseProvider extends ChangeNotifier {
-  PlantsDatabase db = PlantsDatabase();
+  PlantsDatabase plantsdb = PlantsDatabase();
   Future<List<Plant>> plants() async {
-    return await db.getAllPlants();
-  }
-
-  Future<bool> isInMauritania(Position position) async {
-    //TODO: implement location checking return
-
-    return true;
+    return await plantsdb.getAllPlants();
   }
 }
