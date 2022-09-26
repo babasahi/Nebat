@@ -100,10 +100,26 @@ class PlantsDatabase {
     }
   }
 
-  Future<Plant> getPlant(int plantId) async {
-    var raw = await plantsdb.doc(plantId.toString()).get();
-    Map<String, dynamic> object = raw as Map<String, dynamic>;
-    return Plant.fromJson(object);
+  Future<Plant?> getPlant(int plantId) async {
+    try {
+      var raw = await plantsdb.doc(plantId.toString()).get();
+      Map<String, dynamic> object = raw as Map<String, dynamic>;
+      return Plant.fromJson(object);
+    } catch (e) {
+      print(e);
+      return null;
+    }
+  }
+
+  // Checks if a plant has a record in the database
+  Future<bool> plantExist(int plantId) async {
+    try {
+      var obj = await plantsdb.doc(plantId.toString()).get();
+      return obj.exists;
+    } catch (e) {
+      print(e);
+      return false;
+    }
   }
 
   Future<List<Plant>> getAllPlants() async {
