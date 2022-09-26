@@ -1,6 +1,5 @@
 // ignore_for_file: avoid_print
 import 'package:flutter/material.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:nebat/screens/home_screen.dart';
 import 'package:nebat/services/providers.dart';
 import 'package:provider/provider.dart';
@@ -17,8 +16,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  late Position _position;
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:nebat/constants.dart';
 import 'package:nebat/models/models.dart';
 import 'package:nebat/services/providers.dart';
 import 'package:provider/provider.dart';
@@ -102,11 +103,7 @@ class PlantNameWidget extends StatelessWidget {
         Provider.of<IdentificationProvider>(context).isImageSet
             ? (Provider.of<IdentificationProvider>(context).name)
             : 'Please Capture image',
-        style: const TextStyle(
-            fontWeight: FontWeight.w400,
-            letterSpacing: 0.5,
-            fontSize: 32,
-            fontFamily: 'Sriracha'),
+        style: kPlantNameStyle,
       )),
     );
   }
