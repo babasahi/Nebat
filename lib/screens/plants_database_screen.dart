@@ -58,7 +58,7 @@ class PlantWidget extends StatelessWidget {
               const SizedBox(width: 20),
               Text(
                 plant.plantName,
-                style: kPlantNameStyle,
+                style: kPlantNameStyle.copyWith(fontSize: 16),
               ),
             ],
           )
