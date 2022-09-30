@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:nebat/constants.dart';
 import 'package:nebat/models/models.dart';
+import 'package:nebat/screens/image_preview.dart';
 import 'package:nebat/services/providers.dart';
 import 'package:provider/provider.dart';
 
@@ -208,31 +209,46 @@ class _PlantSuggestionWidgetState extends State<PlantSuggestionWidget> {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 0, horizontal: 2),
-      height: 24,
+      width: MediaQuery.of(context).size.width / 3,
       decoration: BoxDecoration(
           borderRadius: const BorderRadius.all(Radius.circular(8)),
-          border: Border.all(),
-          color: Colors.blueAccent.withOpacity(0.4)),
-      padding: const EdgeInsets.all(4),
-      child: Stack(children: [
-        Image(image: NetworkImage(widget.plant.imagePath)),
-        Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              widget.plant.plantName,
-              style: const TextStyle(fontSize: 18, fontFamily: 'Sriracha'),
-            ),
-            Text(
-              widget.plant.probability.toStringAsFixed(3),
-              style: const TextStyle(
-                  fontSize: 18,
-                  fontFamily: 'Cairo',
-                  fontWeight: FontWeight.bold),
-            ),
-          ],
-        )
-      ]),
+          border: Border.all(width: 2, color: Colors.deepPurpleAccent),
+          color: Colors.white10),
+      child: GestureDetector(
+        onTap: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: ((context) =>
+                      ImagePreviewPage(url: widget.plant.imagePath))));
+        },
+        child: Stack(children: [
+          Image(
+            image: NetworkImage(widget.plant.imagePath),
+            height: MediaQuery.of(context).size.height / 6,
+            width: MediaQuery.of(context).size.width / 3,
+            fit: BoxFit.cover,
+          ),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Expanded(
+                child: Text(
+                  widget.plant.plantName,
+                  style: const TextStyle(fontSize: 18, fontFamily: 'Sriracha'),
+                ),
+              ),
+              Text(
+                '${widget.plant.probability.toStringAsFixed(3)}%',
+                style: const TextStyle(
+                    fontSize: 18,
+                    fontFamily: 'Cairo',
+                    fontWeight: FontWeight.bold),
+              ),
+            ],
+          ),
+        ]),
+      ),
     );
   }
 }
