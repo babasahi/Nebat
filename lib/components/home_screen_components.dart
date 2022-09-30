@@ -180,6 +180,7 @@ class _SuggestionsWidgetState extends State<SuggestionsWidget> {
                       itemBuilder: (context, index) {
                         List<Plant> plants =
                             Provider.of<IdentificationProvider>(context).plants;
+
                         return PlantSuggestionWidget(plant: plants[index]);
                       }),
                 ),
@@ -192,14 +193,17 @@ class _SuggestionsWidgetState extends State<SuggestionsWidget> {
   }
 }
 
-class PlantSuggestionWidget extends StatelessWidget {
-  const PlantSuggestionWidget({
-    Key? key,
-    required this.plant,
-  }) : super(key: key);
+class PlantSuggestionWidget extends StatefulWidget {
+  const PlantSuggestionWidget({Key? key, required this.plant})
+      : super(key: key);
 
   final Plant plant;
 
+  @override
+  State<PlantSuggestionWidget> createState() => _PlantSuggestionWidgetState();
+}
+
+class _PlantSuggestionWidgetState extends State<PlantSuggestionWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -211,16 +215,16 @@ class PlantSuggestionWidget extends StatelessWidget {
           color: Colors.blueAccent.withOpacity(0.4)),
       padding: const EdgeInsets.all(4),
       child: Stack(children: [
-        // Image(image: NetworkImage(plant.imagePath)),
+        Image(image: NetworkImage(widget.plant.imagePath)),
         Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              plant.plantName,
+              widget.plant.plantName,
               style: const TextStyle(fontSize: 18, fontFamily: 'Sriracha'),
             ),
             Text(
-              plant.probability.toStringAsFixed(3),
+              widget.plant.probability.toStringAsFixed(3),
               style: const TextStyle(
                   fontSize: 18,
                   fontFamily: 'Cairo',

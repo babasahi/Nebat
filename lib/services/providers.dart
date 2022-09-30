@@ -29,6 +29,7 @@ class IdentificationProvider extends ChangeNotifier {
   String _name = '.....';
   bool _isImageSet = false;
   List<Plant> _plants = [];
+  PlantsAPI api = PlantsAPI();
 
   Widget buttonLabel =
       const ButtonWidget(text: 'CAPTURE', icon: FontAwesomeIcons.camera);
@@ -41,7 +42,6 @@ class IdentificationProvider extends ChangeNotifier {
   IdentificationState get state => _state;
 
   Future<void> identify() async {
-    PlantsAPI api = PlantsAPI();
     try {
       _isLoading = true;
       notifyListeners();
@@ -66,11 +66,6 @@ class IdentificationProvider extends ChangeNotifier {
     }
   }
 
-  // Future<void> addPlantToDatabase(Plant plant) async {
-  //   PlantsDatabase db = PlantsDatabase();
-  //   db.addPlantToDatabase(plant);
-  // }
-
   Future<void> pickImage() async {
     print('capturing image...');
     final ImagePicker picker = ImagePicker();
@@ -91,11 +86,8 @@ class IdentificationProvider extends ChangeNotifier {
     print('converted image to base64');
     return base64Encode(bytes);
   }
-}
 
-// class PlantsDatabaseProvider extends ChangeNotifier {
-//   PlantsDatabase plantsdb = PlantsDatabase();
-//   Future<List<Plant>> plants() async {
-//     return await plantsdb.getAllPlants();
-//   }
-// }
+  Future<String> getPlantImage(String plantName) async {
+    return await api.getImageFromWeb(plantName);
+  }
+}

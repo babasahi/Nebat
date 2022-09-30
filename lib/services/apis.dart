@@ -34,11 +34,13 @@ class PlantsAPI {
         List<dynamic> suggesstions = results['suggestions'];
         for (var suggesstion in suggesstions) {
           Map<String, dynamic> plant = suggesstion as Map<String, dynamic>;
+          String name = plant['plant_name'] as String;
+          String plantUrl = await getImageFromWeb(name);
           plants.add(Plant(
               id: plant['id'] as int,
               probability: (plant['probability'] as double) * 100,
-              plantName: plant['plant_name'] as String,
-              imagePath: results['images'][0]['url'] as String,
+              plantName: name,
+              imagePath: plantUrl,
               images: [],
               suggestions: []));
         }
