@@ -1,7 +1,6 @@
 // ignore_for_file: avoid_print
 import 'dart:convert';
 import 'package:beautiful_soup_dart/beautiful_soup.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:http/http.dart' as http;
 import 'package:nebat/models/models.dart';
 
@@ -87,53 +86,5 @@ class PlantsAPI {
     print(r.split('src="').last.split(';').first);
 
     return '';
-  }
-}
-
-class PlantsDatabase {
-  final plantsdb = FirebaseFirestore.instance.collection('plants');
-  Future<void> addPlantToDatabase(Plant newPlant) async {
-    try {
-      await plantsdb.doc(newPlant.id.toString()).set(newPlant.toJson());
-    } catch (e) {
-      print(e);
-    }
-  }
-
-  Future<Plant?> getPlant(int plantId) async {
-    try {
-      var raw = await plantsdb.doc(plantId.toString()).get();
-      Map<String, dynamic> object = raw as Map<String, dynamic>;
-      return Plant.fromJson(object);
-    } catch (e) {
-      print(e);
-      return null;
-    }
-  }
-
-  // Checks if a plant has a record in the database
-  Future<bool> plantExist(int plantId) async {
-    try {
-      var obj = await plantsdb.doc(plantId.toString()).get();
-      return obj.exists;
-    } catch (e) {
-      print(e);
-      return false;
-    }
-  }
-
-  Future<List<Plant>> getAllPlants() async {
-    List<Map<String, dynamic>> data = [];
-    List<Plant> plants = [];
-    QuerySnapshot<Map<String, dynamic>> rawdata = await plantsdb.get();
-    var objects = rawdata.docs;
-    objects.map((e) {
-      data.add(e as Map<String, dynamic>);
-    });
-
-    for (var plant in data) {
-      plants.add(Plant.fromJson(plant));
-    }
-    return plants;
   }
 }
