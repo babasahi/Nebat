@@ -82,11 +82,13 @@ class PlantsAPI {
   }
 
   Future<String> getImageFromWeb(String query) async {
+    String result = '';
     String html = await getHTMLDoc(query);
     BeautifulSoup bs = BeautifulSoup(html);
-    String r = bs.find('img', class_: 'yWs4tf').toString();
-    print(r.split('src="').last.split(';').first);
+    String raw = bs.find('img', class_: 'yWs4tf').toString();
+    result = raw.split('src="').last.split(';').first;
+    print(result);
 
-    return '';
+    return result;
   }
 }
