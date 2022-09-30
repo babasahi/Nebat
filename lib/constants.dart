@@ -6,3 +6,10 @@ const kPlantNameStyle = TextStyle(
     letterSpacing: 0.5,
     fontSize: 32,
     fontFamily: 'Sriracha');
+const kWhoAreWeStyle = TextStyle(
+  fontFamily: 'Inconsolata',
+  letterSpacing: 1,
+  fontWeight: FontWeight.normal,
+  fontSize: 22,
+);
+const Color kSecondaryColor = Colors.deepPurple;

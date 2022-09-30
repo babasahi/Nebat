@@ -1,12 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:nebat/constants.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class WhoAreWe extends StatefulWidget {
+const String part1 =
+    'Babe Saleh is a computer programmer who decided to start a software startup. graduated from Laayoune High School., with a baccalaureate in Natural Sciences and currently majoring in Computer Engineering at the Higher School of Technology (EST) in Casablanca.';
+const String part2 =
+    'He has an aspiring vision in software development business particularly app development. And in 04/10/2021  he launched his first app, Telmidi.';
+const String part3 =
+    'Telmidi is a platform that helps high school students to master their curriculum in an easy and interactive way, it\'s free and always will be free.';
+const String part4 =
+    'If you are a graphic designer, consider joining us by emailing: telmidi.contact@gmail.com.';
+String part5 =
+    'All images and vector materials used in this software, are attributed to vecteezy.com and  flaticons.com ';
+
+class WhoAreWePage extends StatefulWidget {
+  const WhoAreWePage({super.key});
+
   @override
-  State<WhoAreWe> createState() => _WhoAreWeState();
+  State<WhoAreWePage> createState() => _WhoAreWePageState();
 }
 
-class _WhoAreWeState extends State<WhoAreWe> {
+class _WhoAreWePageState extends State<WhoAreWePage> {
   final String _landingPage = "https://mohamed-abdelahi-haibelty.github.io";
   final String _email =
       "mailto:<babesalehmahfoud@gmail.com>?subject=Hello Telmidi&body=Hello";
@@ -92,20 +107,20 @@ class _WhoAreWeState extends State<WhoAreWe> {
                 margin: const EdgeInsets.all(12),
                 child: Column(
                   children: [
-                    SelectableText(WhoAreWeData().part1,
+                    const SelectableText(part1,
                         style: kWhoAreWeStyle, textAlign: TextAlign.justify),
                     const SizedBox(height: 68),
-                    SelectableText(WhoAreWeData().part2,
+                    const SelectableText(part2,
                         style: kWhoAreWeStyle, textAlign: TextAlign.justify),
                     const SizedBox(height: 68),
-                    SelectableText(WhoAreWeData().part3,
+                    const SelectableText(part3,
                         style: kWhoAreWeStyle, textAlign: TextAlign.justify),
                     const SizedBox(height: 68),
-                    SelectableText(WhoAreWeData().part4,
+                    const SelectableText(part4,
                         style: kWhoAreWeStyle, textAlign: TextAlign.justify),
                     const SizedBox(height: 38),
                     SelectableText(
-                      WhoAreWeData().part5,
+                      part5,
                       style: kWhoAreWeStyle.copyWith(
                           fontStyle: FontStyle.italic,
                           fontWeight: FontWeight.bold,
@@ -118,16 +133,16 @@ class _WhoAreWeState extends State<WhoAreWe> {
               ),
               const SizedBox(height: 60),
               Container(
-                color: kMainColor,
+                color: Colors.white,
                 child: Column(
                   children: [
-                    Text(
+                    const Text(
                       'Contact Us',
                       style: TextStyle(
                           fontFamily: 'Telmidi',
                           fontSize: 36,
                           fontWeight: FontWeight.bold,
-                          color: kSecondaryColor),
+                          color: Colors.deepPurple),
                     ),
                     const SizedBox(
                       height: 30,
@@ -139,31 +154,31 @@ class _WhoAreWeState extends State<WhoAreWe> {
                             onTap: () {
                               sendEmail("email");
                             },
-                            child: Icon(FontAwesomeIcons.solidEnvelope,
-                                color: kSecondaryColor)),
+                            child: const Icon(FontAwesomeIcons.solidEnvelope,
+                                color: Colors.deepPurple)),
                         GestureDetector(
                             onTap: () {
                               sendEmail("website");
                             },
-                            child:
-                                Icon(Icons.language, color: kSecondaryColor)),
+                            child: const Icon(Icons.language,
+                                color: kSecondaryColor)),
                         GestureDetector(
                             onTap: () {
                               sendEmail("facebook");
                             },
-                            child: Icon(FontAwesomeIcons.facebookSquare,
+                            child: const Icon(FontAwesomeIcons.facebookSquare,
                                 color: kSecondaryColor)),
                         GestureDetector(
                             onTap: () {
                               sendEmail("call");
                             },
-                            child: Icon(FontAwesomeIcons.phoneAlt,
+                            child: const Icon(FontAwesomeIcons.phoneAlt,
                                 color: kSecondaryColor)),
                         GestureDetector(
                             onTap: () {
                               sendEmail("linkedin");
                             },
-                            child: Icon(FontAwesomeIcons.linkedin,
+                            child: const Icon(FontAwesomeIcons.linkedin,
                                 color: kSecondaryColor)),
                       ],
                     ),
