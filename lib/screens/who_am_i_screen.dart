@@ -28,7 +28,7 @@ class _WhoAreWePageState extends State<WhoAreWePage> {
   final String _linkedin = 'linkedin.com/in/babe-saleh-mahfoud-519b52200/';
   final String _facebook = "";
   final String _call = "tel:+222 31 04 81 16";
-  Future<void> sendEmail(String type) async {
+  Future<void> followLink(String type) async {
     switch (type) {
       case "website":
         await canLaunchUrl(Uri.parse(_landingPage))
@@ -59,9 +59,7 @@ class _WhoAreWePageState extends State<WhoAreWePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-      ),
+      appBar: AppBar(),
       body: SafeArea(
         child: Container(
           color: Colors.white,
@@ -89,7 +87,7 @@ class _WhoAreWePageState extends State<WhoAreWePage> {
                       Text(
                         'Babe Saleh Mahfoud',
                         style: TextStyle(
-                          fontFamily: 'Nunito',
+                          fontFamily: 'Cairo',
                           fontWeight: FontWeight.bold,
                           fontStyle: FontStyle.italic,
                           fontSize: 20,
@@ -152,31 +150,31 @@ class _WhoAreWePageState extends State<WhoAreWePage> {
                       children: [
                         GestureDetector(
                             onTap: () {
-                              sendEmail("email");
+                              followLink("email");
                             },
                             child: const Icon(FontAwesomeIcons.solidEnvelope,
                                 color: Colors.deepPurple)),
                         GestureDetector(
                             onTap: () {
-                              sendEmail("website");
+                              followLink("website");
                             },
                             child: const Icon(Icons.language,
                                 color: kSecondaryColor)),
                         GestureDetector(
                             onTap: () {
-                              sendEmail("facebook");
+                              followLink("facebook");
                             },
                             child: const Icon(FontAwesomeIcons.facebookSquare,
                                 color: kSecondaryColor)),
                         GestureDetector(
                             onTap: () {
-                              sendEmail("call");
+                              followLink("call");
                             },
                             child: const Icon(FontAwesomeIcons.phoneAlt,
                                 color: kSecondaryColor)),
                         GestureDetector(
                             onTap: () {
-                              sendEmail("linkedin");
+                              followLink("linkedin");
                             },
                             child: const Icon(FontAwesomeIcons.linkedin,
                                 color: kSecondaryColor)),

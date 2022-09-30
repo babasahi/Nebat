@@ -7,7 +7,7 @@ const kPlantNameStyle = TextStyle(
     fontSize: 32,
     fontFamily: 'Sriracha');
 const kWhoAreWeStyle = TextStyle(
-  fontFamily: 'Inconsolata',
+  fontFamily: 'Poppins',
   letterSpacing: 1,
   fontWeight: FontWeight.normal,
   fontSize: 22,
