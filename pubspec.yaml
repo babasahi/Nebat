@@ -26,7 +26,6 @@ dependencies:
   modal_progress_hud_nsn: ^0.3.0
   beautiful_soup_dart: ^0.3.0
   firebase_core: ^1.23.0
-  geolocator: ^9.0.2
   cloud_firestore: ^3.4.9
   firebase_storage: ^10.3.9
   cached_network_image: ^3.2.2
