@@ -16,8 +16,10 @@ enum IdentificationState {
 
 List<Plant> plantMapsToModels(List<Map<String, dynamic>> mapsList) {
   List<Plant> plants = [];
-  for (var map in mapsList) {}
-  return [];
+  for (var map in mapsList) {
+    plants.add(Plant.fromJson(map));
+  }
+  return plants;
 }
 
 class IdentificationProvider extends ChangeNotifier {
@@ -64,10 +66,10 @@ class IdentificationProvider extends ChangeNotifier {
     }
   }
 
-  Future<void> addPlantToDatabase(Plant plant) async {
-    PlantsDatabase db = PlantsDatabase();
-    db.addPlantToDatabase(plant);
-  }
+  // Future<void> addPlantToDatabase(Plant plant) async {
+  //   PlantsDatabase db = PlantsDatabase();
+  //   db.addPlantToDatabase(plant);
+  // }
 
   Future<void> pickImage() async {
     print('capturing image...');
@@ -91,9 +93,9 @@ class IdentificationProvider extends ChangeNotifier {
   }
 }
 
-class PlantsDatabaseProvider extends ChangeNotifier {
-  PlantsDatabase plantsdb = PlantsDatabase();
-  Future<List<Plant>> plants() async {
-    return await plantsdb.getAllPlants();
-  }
-}
+// class PlantsDatabaseProvider extends ChangeNotifier {
+//   PlantsDatabase plantsdb = PlantsDatabase();
+//   Future<List<Plant>> plants() async {
+//     return await plantsdb.getAllPlants();
+//   }
+// }
