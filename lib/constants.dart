@@ -12,4 +12,7 @@ const kWhoAreWeStyle = TextStyle(
   fontWeight: FontWeight.normal,
   fontSize: 22,
 );
-const Color kSecondaryColor = Colors.deepPurple;
+
+// COLORS
+const Color kSecondaryColor = Colors.white;
+const Color kPrimaryColor = Colors.deepPurpleAccent;

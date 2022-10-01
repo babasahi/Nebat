@@ -17,7 +17,10 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
+        backgroundColor: Colors.white,
+        elevation: 0,
         actions: [
           GestureDetector(
               onTap: () {
@@ -28,8 +31,12 @@ class _HomePageState extends State<HomePage> {
                     ));
               },
               child: const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 12),
-                child: Icon(FontAwesomeIcons.info),
+                padding: EdgeInsets.symmetric(horizontal: 8),
+                child: Icon(
+                  FontAwesomeIcons.circleInfo,
+                  color: Colors.deepPurpleAccent,
+                  size: 32,
+                ),
               ))
         ],
       ),

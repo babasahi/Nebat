@@ -58,149 +58,113 @@ class _WhoAreWePageState extends State<WhoAreWePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: kSecondaryColor,
       appBar: AppBar(),
       body: SafeArea(
-        child: Container(
-          color: Colors.white,
-          child: ListView(
-            children: [
-              const SizedBox(
-                height: 30,
+        child: ListView(
+          children: [
+            const SizedBox(height: 30),
+            Column(
+              children: const [
+                CircleAvatar(
+                    radius: 60,
+                    backgroundImage:
+                        AssetImage('assets/images/whoarewe/saleh.jpg')),
+                SizedBox(height: 12),
+                Text(
+                  'Babe Saleh Mahfoud',
+                  style: TextStyle(fontFamily: 'Sriracha', fontSize: 30),
+                ),
+              ],
+            ),
+            const SizedBox(height: 60),
+            Container(
+              margin: const EdgeInsets.symmetric(horizontal: 12),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const SelectableText(part1,
+                      style: kWhoAreWeStyle, textAlign: TextAlign.justify),
+                  SizedBox(height: MediaQuery.of(context).size.height / 25),
+                  const SelectableText(part2,
+                      style: kWhoAreWeStyle, textAlign: TextAlign.justify),
+                  SizedBox(height: MediaQuery.of(context).size.height / 25),
+                  const SelectableText(part3,
+                      style: kWhoAreWeStyle, textAlign: TextAlign.justify),
+                  SizedBox(height: MediaQuery.of(context).size.height / 25),
+                  const SelectableText(part4,
+                      style: kWhoAreWeStyle, textAlign: TextAlign.justify),
+                  SizedBox(height: MediaQuery.of(context).size.height / 25),
+                  SelectableText(part5,
+                      style: kWhoAreWeStyle.copyWith(
+                          fontSize: 14, fontFamily: 'Poppins'),
+                      textAlign: TextAlign.justify),
+                ],
               ),
-              Padding(
-                padding: const EdgeInsets.only(top: 20),
-                child: Container(
-                  color: Colors.white,
-                  padding: const EdgeInsets.symmetric(horizontal: 38),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: const [
-                      CircleAvatar(
-                        radius: 60,
-                        backgroundImage:
-                            AssetImage('assets/images/whoarewe/saleh.jpg'),
+            ),
+            Column(
+              children: [
+                const Text(
+                  'Contact Us',
+                  style: TextStyle(
+                      fontFamily: 'Poppins',
+                      fontSize: 36,
+                      fontWeight: FontWeight.bold,
+                      color: kPrimaryColor),
+                ),
+                SizedBox(height: MediaQuery.of(context).size.height / 30),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    GestureDetector(
+                        onTap: () {
+                          followLink("email");
+                        },
+                        child: const Icon(FontAwesomeIcons.solidEnvelope,
+                            color: kPrimaryColor)),
+                    GestureDetector(
+                        onTap: () {
+                          followLink("website");
+                        },
+                        child:
+                            const Icon(Icons.language, color: kPrimaryColor)),
+                    GestureDetector(
+                        onTap: () {
+                          followLink("facebook");
+                        },
+                        child: const Icon(FontAwesomeIcons.squareFacebook,
+                            color: kPrimaryColor)),
+                    GestureDetector(
+                        onTap: () {
+                          followLink("call");
+                        },
+                        child: const Icon(FontAwesomeIcons.phoneFlip,
+                            color: kPrimaryColor)),
+                    GestureDetector(
+                        onTap: () {
+                          followLink("linkedin");
+                        },
+                        child: const Icon(FontAwesomeIcons.linkedin,
+                            color: kPrimaryColor)),
+                  ],
+                ),
+                SizedBox(height: MediaQuery.of(context).size.height / 30),
+                const Center(
+                  child: Padding(
+                    padding: EdgeInsets.only(bottom: 6.0),
+                    child: Text(
+                      'All Rights Reserved, Telmidi 2021.',
+                      style: TextStyle(
+                        fontFamily: 'Cairo',
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
                       ),
-                      SizedBox(
-                        height: 12,
-                      ),
-                      Text(
-                        'Babe Saleh Mahfoud',
-                        style: TextStyle(
-                          fontFamily: 'Cairo',
-                          fontWeight: FontWeight.bold,
-                          fontStyle: FontStyle.italic,
-                          fontSize: 20,
-                        ),
-                      ),
-                    ],
+                    ),
                   ),
                 ),
-              ),
-              const SizedBox(
-                height: 60,
-              ),
-              Container(
-                color: Colors.white,
-                margin: const EdgeInsets.all(12),
-                child: Column(
-                  children: [
-                    const SelectableText(part1,
-                        style: kWhoAreWeStyle, textAlign: TextAlign.justify),
-                    const SizedBox(height: 68),
-                    const SelectableText(part2,
-                        style: kWhoAreWeStyle, textAlign: TextAlign.justify),
-                    const SizedBox(height: 68),
-                    const SelectableText(part3,
-                        style: kWhoAreWeStyle, textAlign: TextAlign.justify),
-                    const SizedBox(height: 68),
-                    const SelectableText(part4,
-                        style: kWhoAreWeStyle, textAlign: TextAlign.justify),
-                    const SizedBox(height: 38),
-                    SelectableText(
-                      part5,
-                      style: kWhoAreWeStyle.copyWith(
-                          fontStyle: FontStyle.italic,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 14,
-                          fontFamily: 'Source Sans Pro'),
-                      textAlign: TextAlign.justify,
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(height: 60),
-              Container(
-                color: Colors.white,
-                child: Column(
-                  children: [
-                    const Text(
-                      'Contact Us',
-                      style: TextStyle(
-                          fontFamily: 'Telmidi',
-                          fontSize: 36,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.deepPurple),
-                    ),
-                    const SizedBox(
-                      height: 30,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        GestureDetector(
-                            onTap: () {
-                              followLink("email");
-                            },
-                            child: const Icon(FontAwesomeIcons.solidEnvelope,
-                                color: Colors.deepPurple)),
-                        GestureDetector(
-                            onTap: () {
-                              followLink("website");
-                            },
-                            child: const Icon(Icons.language,
-                                color: kSecondaryColor)),
-                        GestureDetector(
-                            onTap: () {
-                              followLink("facebook");
-                            },
-                            child: const Icon(FontAwesomeIcons.facebookSquare,
-                                color: kSecondaryColor)),
-                        GestureDetector(
-                            onTap: () {
-                              followLink("call");
-                            },
-                            child: const Icon(FontAwesomeIcons.phoneAlt,
-                                color: kSecondaryColor)),
-                        GestureDetector(
-                            onTap: () {
-                              followLink("linkedin");
-                            },
-                            child: const Icon(FontAwesomeIcons.linkedin,
-                                color: kSecondaryColor)),
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 70,
-                    ),
-                    const Center(
-                      child: Padding(
-                        padding: EdgeInsets.only(bottom: 6.0),
-                        child: Text(
-                          'All Rights Reserved, Telmidi 2021.',
-                          style: TextStyle(
-                            fontFamily: 'Ubuntu',
-                            fontSize: 14,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
+              ],
+            ),
+          ],
         ),
       ),
     );

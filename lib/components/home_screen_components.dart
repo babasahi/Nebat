@@ -33,7 +33,8 @@ class _CameraWidgetState extends State<CameraWidget> {
         margin: const EdgeInsets.symmetric(horizontal: 20),
         decoration: BoxDecoration(
           borderRadius: const BorderRadius.all(Radius.circular(12)),
-          border: Border.all(width: 12, color: Colors.deepPurpleAccent),
+          border: Border.all(
+              width: 4, color: Colors.deepPurpleAccent.withOpacity(0.8)),
         ),
         child: Provider.of<IdentificationProvider>(context).isImageSet
             ? Center(
@@ -98,7 +99,9 @@ class PlantNameWidget extends StatelessWidget {
       width: double.infinity,
       margin: const EdgeInsets.symmetric(vertical: 22, horizontal: 22),
       height: MediaQuery.of(context).size.height / 14,
-      decoration: BoxDecoration(color: Colors.black.withOpacity(0.1)),
+      decoration: BoxDecoration(
+          borderRadius: const BorderRadius.all(Radius.circular(12)),
+          color: Colors.black.withOpacity(0.05)),
       child: Center(
           child: Text(
         Provider.of<IdentificationProvider>(context).isImageSet
@@ -117,9 +120,9 @@ class ButtonWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: const BoxDecoration(
-          color: Colors.greenAccent,
-          borderRadius: BorderRadius.all(Radius.circular(8))),
+      decoration: BoxDecoration(
+          color: kPrimaryColor.withOpacity(0.8),
+          borderRadius: const BorderRadius.all(Radius.circular(8))),
       padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 4),
       width: MediaQuery.of(context).size.width / 3,
       child: Row(
@@ -130,12 +133,14 @@ class ButtonWidget extends StatelessWidget {
             text,
             style: const TextStyle(
               fontSize: 24,
+              color: kSecondaryColor,
               fontFamily: 'Poppins',
               fontWeight: FontWeight.bold,
             ),
           ),
           Icon(
             icon,
+            color: kSecondaryColor,
             size: 22,
           )
         ],
