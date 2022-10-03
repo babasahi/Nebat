@@ -43,11 +43,10 @@ class IdentificationProvider extends ChangeNotifier {
 
   Future<void> identify() async {
     try {
+      // show loading spinner ...
       _isLoading = true;
       notifyListeners();
-      _plants = await api.identifyPlant(toBase64(
-        _image!,
-      ));
+      _plants = await api.identifyPlant(toBase64(image));
       if (_plants.isNotEmpty) {
         _name = _plants[0].plantName;
         _state = IdentificationState.identified;
@@ -60,6 +59,7 @@ class IdentificationProvider extends ChangeNotifier {
         notifyListeners();
       }
     } catch (e) {
+      // hide loading spinner
       _isLoading = false;
       notifyListeners();
       print(e);
@@ -81,8 +81,8 @@ class IdentificationProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  String toBase64(File file) {
-    List<int> bytes = image.readAsBytesSync();
+  String toBase64(File imageFile) {
+    List<int> bytes = imageFile.readAsBytesSync();
     print('converted image to base64');
     return base64Encode(bytes);
   }
