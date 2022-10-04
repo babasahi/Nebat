@@ -15,6 +15,7 @@ enum IdentificationState {
 }
 
 List<Plant> plantMapsToModels(List<Map<String, dynamic>> mapsList) {
+  //NEEDS TESTING
   List<Plant> plants = [];
   for (var map in mapsList) {
     plants.add(Plant.fromJson(map));
@@ -42,6 +43,7 @@ class IdentificationProvider extends ChangeNotifier {
   IdentificationState get state => _state;
 
   Future<void> identify() async {
+    //NEEDS TESTING
     try {
       // show loading spinner ...
       _isLoading = true;

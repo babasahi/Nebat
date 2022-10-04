@@ -9,6 +9,7 @@ class PlantsAPI {
   final String _endpoint = 'https://api.plant.id/v2/identify';
 
   Future<List<Plant>> identifyPlant(String base64Image) async {
+    //NEEDS TESTING
     List<String> images = [];
     List<Plant> plants = [];
 
@@ -57,6 +58,7 @@ class PlantsAPI {
   }
 
   Future<String> getHTMLDoc(String query) async {
+    //NEEDS TESTING
     String result = '';
     String url = 'https://www.google.com/search?q=$query&source=lnms&tbm=isch';
     Map<String, String> headers = {
@@ -82,6 +84,7 @@ class PlantsAPI {
   }
 
   Future<String> getImageFromWeb(String query) async {
+    //NEEDS TESTING
     String result = '';
     String html = await getHTMLDoc(query);
     BeautifulSoup bs = BeautifulSoup(html);
