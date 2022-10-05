@@ -42,8 +42,7 @@ class PlantsAPI {
               probability: (plant['probability'] as double) * 100,
               plantName: name,
               imagePath: plantUrl,
-              images: [],
-              suggestions: []));
+              images: []));
         }
 
         return plants;
@@ -84,7 +83,6 @@ class PlantsAPI {
   }
 
   Future<String> getImageFromWeb(String query) async {
-    //NEEDS TESTING
     String result = '';
     String html = await getHTMLDoc(query);
     BeautifulSoup bs = BeautifulSoup(html);
