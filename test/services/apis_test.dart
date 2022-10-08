@@ -1,26 +1,9 @@
 import 'dart:io';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/annotations.dart';
 import 'package:nebat/services/apis.dart';
 import 'package:nebat/services/providers.dart';
 
-class DataMap {
-  List<Map<String, dynamic>> = [{
-    ""
-  },{},{}];
- 
- 
-}
-
-@GenerateNiceMocks([MockSpec<DataMap>()])
 void main() {
-  group('serialization', () {
-    DataMap data = DataMap();
-
-    test('converts List<Map<String,dynamic>> to List<Plant>', () {
-      plantMapsToModels(data.data);
-    });
-  });
   group('provider methods', () {
     IdentificationProvider provider = IdentificationProvider();
 
