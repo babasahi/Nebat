@@ -30,7 +30,6 @@
 
 - Android: coming soon 👀
 - iOS/macOS: coming soon 👀.
-- Linux :coming soon 👀
 
 ---
 
@@ -58,6 +57,8 @@ I wanted to create a very elegant and fast plant identification app.
 Here's a brief high-level overview of the tech stack the Nebat app uses:
 
 - This project uses the [Flutter app development framework](https://flutter.dev/).
+
+- I used [Plant.id](https://plant.id)'s API.
 
 For more information on the technologies that power Nebat, check out the [Tech Stack](https://github.com/babe-saleh-mahfoud/Nebat/wiki/Tech-Stack) page on our wiki.
 
