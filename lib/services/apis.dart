@@ -3,9 +3,9 @@ import 'dart:convert';
 import 'package:beautiful_soup_dart/beautiful_soup.dart';
 import 'package:http/http.dart' as http;
 import 'package:nebat/models/models.dart';
+import 'package:nebat/secret_keys.dart';
 
 class PlantsAPI {
-  final String _apikey = 'nGFgz6bm5mpkvgOVdhCdU31WjIJHEbGAOEEahX3klSkxcnsmpj';
   final String _endpoint = 'https://api.plant.id/v2/identify';
 
   Future<List<Plant>> identifyPlant(String base64Image) async {
@@ -21,7 +21,7 @@ class PlantsAPI {
         headers: {
           'Accept': '*/*',
           'Access-Control-Allow-Origin': '*',
-          'Api-Key': _apikey,
+          'Api-Key': apiKey,
         },
         body: jsonEncode(body),
       );
