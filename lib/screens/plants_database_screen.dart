@@ -46,7 +46,7 @@ class PlantWidget extends StatelessWidget {
       margin: const EdgeInsets.symmetric(vertical: 2, horizontal: 4),
       padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 4),
       decoration: const BoxDecoration(
-          color: Colors.lightGreen,
+          color: kPrimaryColor,
           borderRadius: BorderRadius.all(Radius.circular(12))),
       child: Column(
         children: [

@@ -50,7 +50,7 @@
 
 # 🧐 Project philosophy
 
-I wanted to create a very elegant and fast plant identification app.
+I wanted to create a very elegant and fast plant recognition app.
 
 # 👨‍💻 Tech stack
 
@@ -59,8 +59,6 @@ Here's a brief high-level overview of the tech stack the Nebat app uses:
 - This project uses the [Flutter app development framework](https://flutter.dev/).
 
 - I used [Plant.id](https://plant.id)'s API.
-
-For more information on the technologies that power Nebat, check out the [Tech Stack](https://github.com/babe-saleh-mahfoud/Nebat/wiki/Tech-Stack) page on our wiki.
 
 # ✍️ Contributing
 
@@ -73,7 +71,6 @@ If you have a contribution in mind, Feel free to open an issue and then submit y
 If you want to say thank you and/or support active development of Nebat:
 
 - Add a GitHub Star to the project!
-- Tweet about the project on your Twitter!
 - Tag [@babe saleh mahfoud](https://www.linkedin.com/in/babe-saleh-mahfoud-519b52200/) and/or `#Nebat`
 
 Thanks so much for your interest in growing the reach of Nebat!

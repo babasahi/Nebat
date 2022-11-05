@@ -33,8 +33,7 @@ class _CameraWidgetState extends State<CameraWidget> {
         margin: const EdgeInsets.symmetric(horizontal: 20),
         decoration: BoxDecoration(
           borderRadius: const BorderRadius.all(Radius.circular(12)),
-          border: Border.all(
-              width: 4, color: Colors.deepPurpleAccent.withOpacity(0.8)),
+          border: Border.all(width: 4, color: kPrimaryColor),
         ),
         child: Provider.of<IdentificationProvider>(context).isImageSet
             ? Center(
@@ -133,14 +132,14 @@ class ButtonWidget extends StatelessWidget {
             text,
             style: const TextStyle(
               fontSize: 24,
-              color: kSecondaryColor,
+              color: Colors.black,
               fontFamily: 'Poppins',
               fontWeight: FontWeight.bold,
             ),
           ),
           Icon(
             icon,
-            color: kSecondaryColor,
+            color: Colors.black,
             size: 22,
           )
         ],
@@ -217,7 +216,7 @@ class _PlantSuggestionWidgetState extends State<PlantSuggestionWidget> {
       width: MediaQuery.of(context).size.width / 3,
       decoration: BoxDecoration(
           borderRadius: const BorderRadius.all(Radius.circular(8)),
-          border: Border.all(width: 2, color: Colors.deepPurpleAccent),
+          border: Border.all(width: 2, color: kPrimaryColor),
           color: Colors.white10),
       child: GestureDetector(
         onTap: () {
