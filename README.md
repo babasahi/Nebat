@@ -2,7 +2,7 @@
 
 | Screenshot 1 | Screenshot 2 | Screenshot 3 |
 | :-------------------------------------: | :-------------------------------------: | | :--------------------------------------: |
-| ![Screenshot 1](screenshots/screen1.jpg) | ![Screenshot 2](screenshots/screen2.jpg) | ![Screenshot 3](screenshots/screen3.jpg)
+| ![Screenshot 1](screenshots/image1.png) | ![Screenshot 2](screenshots/image2.png) | ![Screenshot 3](screenshots/image3.png) |
 
 ---
 
