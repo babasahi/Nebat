@@ -35,7 +35,7 @@ class _HomePageState extends State<HomePage> {
                 padding: EdgeInsets.symmetric(horizontal: 8),
                 child: Icon(
                   FontAwesomeIcons.circleInfo,
-                  color: Colors.black,
+                  color: kPrimaryColor,
                   size: 32,
                 ),
               ))

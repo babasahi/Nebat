@@ -40,8 +40,7 @@ class PlantsAPI {
               id: plant['id'] as int,
               probability: (plant['probability'] as double) * 100,
               plantName: name,
-              imagePath: plantUrl,
-              images: []));
+              imagePath: plantUrl));
         }
 
         return plants;
