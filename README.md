@@ -24,14 +24,7 @@
 
 <br />
 
----
 
-### Nebat is Coming soon! 🥳 🚀
-
-- Android: coming soon 👀
-- iOS/macOS: coming soon 👀.
-
----
 
 <br />
 
